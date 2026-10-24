@@ -2,9 +2,9 @@ import type { Ceremony } from "./wedding-data";
 
 // All-day style ICS with precise start/end in IST.
 
-function formatICSDate(iso: string, addHours = 6): string {
+function formatICSDate(iso: string, addHours = 0): string {
   const d = new Date(iso);
-  d.setHours(d.getHours() + addHours - (addHours ? 0 : 0));
+  d.setUTCHours(d.getUTCHours() + addHours);
   const pad = (n: number) => String(n).padStart(2, "0");
   return (
     d.getUTCFullYear() +
