@@ -14,7 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blessings: {
+        Row: {
+          created_at: string
+          guest_name: string
+          id: string
+          message: string
+          side: string | null
+        }
+        Insert: {
+          created_at?: string
+          guest_name: string
+          id?: string
+          message: string
+          side?: string | null
+        }
+        Update: {
+          created_at?: string
+          guest_name?: string
+          id?: string
+          message?: string
+          side?: string | null
+        }
+        Relationships: []
+      }
+      diyas: {
+        Row: {
+          created_at: string
+          guest_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          guest_name?: string | null
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          guest_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      rsvps: {
+        Row: {
+          blessing_message: string | null
+          ceremonies: string[]
+          created_at: string
+          dietary_notes: string | null
+          guest_name: string
+          headcount: number
+          id: string
+          side: string
+        }
+        Insert: {
+          blessing_message?: string | null
+          ceremonies?: string[]
+          created_at?: string
+          dietary_notes?: string | null
+          guest_name: string
+          headcount?: number
+          id?: string
+          side?: string
+        }
+        Update: {
+          blessing_message?: string | null
+          ceremonies?: string[]
+          created_at?: string
+          dietary_notes?: string | null
+          guest_name?: string
+          headcount?: number
+          id?: string
+          side?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
