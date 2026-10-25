@@ -1,3 +1,7 @@
+@import "./mandir_base.css";
+@import "./mandir_master.css";
+@import "./mandir_font_colors.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,29 +13,19 @@
     --m-gold: #dda45d;
     --m-parchment: #fbf5eb;
     --m-cream: #fdfaf4;
+    --mandir-display: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+    --mandir-script: 'Pinyon Script', cursive;
+    --mandir-sans: 'Marcellus', 'Inter', -apple-system, sans-serif;
+    --mandir-digits: 'Cinzel', Georgia, serif;
   }
 
   body {
     background-color: #fbf5eb;
     color: var(--m-ink);
-    scroll-behavior: smooth;
-    font-family: 'Marcellus', 'Georgia', serif;
+    font-family: var(--mandir-sans);
+    margin: 0;
+    padding: 0;
   }
-}
-
-/* Custom Royal Indian Scrollbar */
-::-webkit-scrollbar {
-  width: 7px;
-}
-::-webkit-scrollbar-track {
-  background: #fbf5eb;
-}
-::-webkit-scrollbar-thumb {
-  background: #dda45d;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #ab5626;
 }
 
 /* Bell Swing Animation */
@@ -60,13 +54,6 @@
   100% { transform: skewY(0deg) scaleX(1); }
 }
 
-/* Cloud drift */
-@keyframes cloud-float {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-35px); }
-  100% { transform: translateX(0); }
-}
-
 /* Gentle Falling Petals */
 @keyframes petalFall {
   0% {
@@ -75,37 +62,26 @@
     opacity: 0.8;
   }
   50% {
-    transform: translateX(40px) rotate(180deg);
+    transform: translateX(35px) rotate(180deg);
   }
   100% {
     top: 105vh;
-    transform: translateX(-30px) rotate(360deg);
+    transform: translateX(-25px) rotate(360deg);
     opacity: 0;
   }
 }
 
 .animate-swing-left {
-  transform-origin: top center;
+  transform-origin: 50% 0;
   animation: swing-bell-left 2.5s ease-in-out infinite;
 }
 
 .animate-swing-right {
-  transform-origin: top center;
+  transform-origin: 50% 0;
   animation: swing-bell-right 2.8s ease-in-out infinite;
 }
 
 .animate-flag {
   transform-origin: left center;
   animation: flag-wave 3.5s ease-in-out infinite;
-}
-
-.animate-clouds {
-  animation: cloud-float 18s ease-in-out infinite alternate;
-}
-
-/* Gold Foil Gradient Shimmer */
-.gold-shimmer {
-  background: linear-gradient(135deg, #ab5626 0%, #dda45d 50%, #ab5626 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
