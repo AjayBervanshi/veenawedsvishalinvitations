@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Marcellus', 'Georgia', serif;
+  }
+}
+
+/* Custom Royal Indian Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #2b0e06;
+}
+::-webkit-scrollbar-thumb {
+  background: #b87c33;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dda45d;
+}
+
+/* Bell Swing Animation */
+@keyframes swing-bell-left {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(14deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(6deg); }
+  80% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes swing-bell-right {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-14deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Flag flutter animation */
+@keyframes flag-wave {
+  0% { transform: skewY(0deg) scaleX(1); }
+  50% { transform: skewY(3deg) scaleX(0.97); }
+  100% { transform: skewY(0deg) scaleX(1); }
+}
+
+/* Cloud drift */
+@keyframes cloud-float {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-25px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-swing-left {
+  transform-origin: top center;
+  animation: swing-bell-left 2.5s ease-in-out infinite;
+}
+
+.animate-swing-right {
+  transform-origin: top center;
+  animation: swing-bell-right 2.8s ease-in-out infinite;
+}
+
+.animate-flag {
+  transform-origin: left center;
+  animation: flag-wave 3.5s ease-in-out infinite;
+}
+
+.animate-clouds {
+  animation: cloud-float 16s ease-in-out infinite alternate;
+}
+
+/* Gold Gradient Shimmer */
+.gold-shimmer {
+  background: linear-gradient(135deg, #b87c33 0%, #f7e8d4 50%, #dda45d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border {
+  border-image: linear-gradient(to bottom right, #dda45d, #78350f, #dda45d) 1;
+}
