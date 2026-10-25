@@ -11,6 +11,8 @@
     --m-ink: #5f250f;
     --m-rust: #ab5626;
     --m-gold: #dda45d;
+    --m-gold-light: #f5dfb8;
+    --m-gold-dark: #b87a32;
     --m-parchment: #fbf5eb;
     --m-cream: #fdfaf4;
     --mandir-display: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
@@ -25,6 +27,7 @@
     font-family: var(--mandir-sans);
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 }
 
@@ -84,4 +87,35 @@
 .animate-flag {
   transform-origin: left center;
   animation: flag-wave 3.5s ease-in-out infinite;
+}
+
+/* Gold Gradient Shimmer */
+.gold-shimmer {
+  background: linear-gradient(135deg, #dda45d 0%, #fff0d4 50%, #b87a32 100%);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #ab5626 0%, #5f250f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Royal Arch Card silhouette */
+.royal-mandir-card {
+  border-radius: 2.5rem 2.5rem 1.5rem 1.5rem;
+  background: #ffffff;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(95, 37, 15, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.royal-mandir-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(95, 37, 15, 0.14);
+}
+
+/* Subtle gold foil border pattern */
+.royal-border {
+  border: 2px solid #dda45d;
+  box-shadow: 0 0 0 1px rgba(221, 164, 93, 0.3), inset 0 0 0 1px rgba(221, 164, 93, 0.2);
 }
