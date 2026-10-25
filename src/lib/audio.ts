@@ -45,7 +45,7 @@ function scheduleLoop() {
   const noteGap = 0.62;
   const t0 = ctx.currentTime + 0.05;
   for (let i = 0; i < PHRASE.length; i++) {
-    pluck(SCALE[PHRASE[i]]!, t0 + i * noteGap);
+    pluck(SCALE[PHRASE[i]!]!, t0 + i * noteGap);
     // occasional soft octave flourish
     if (i % 4 === 2) pluck(SCALE[PHRASE[i]!]! * 2, t0 + i * noteGap + 0.08);
   }

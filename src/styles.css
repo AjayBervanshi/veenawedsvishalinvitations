@@ -136,9 +136,21 @@
 @utility paper-grain {
   background-color: var(--paper);
   background-image:
-    radial-gradient(ellipse 80% 50% at 20% 10%, color-mix(in oklab, var(--gold) 6%, transparent), transparent 70%),
-    radial-gradient(ellipse 70% 60% at 85% 90%, color-mix(in oklab, var(--blush-deep) 7%, transparent), transparent 70%),
-    repeating-linear-gradient(45deg, color-mix(in oklab, var(--espresso) 1.2%, transparent) 0 1px, transparent 1px 3px);
+    radial-gradient(
+      ellipse 80% 50% at 20% 10%,
+      color-mix(in oklab, var(--gold) 6%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 85% 90%,
+      color-mix(in oklab, var(--blush-deep) 7%, transparent),
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in oklab, var(--espresso) 1.2%, transparent) 0 1px,
+      transparent 1px 3px
+    );
 }
 
 @utility glass-card {
@@ -170,29 +182,64 @@
 }
 
 @keyframes sway {
-  0%, 100% { transform: rotate(-4deg); }
-  50% { transform: rotate(4deg); }
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
 }
 
 @keyframes flicker {
-  0%, 100% { opacity: 0.85; transform: scaleY(1); }
-  35% { opacity: 1; transform: scaleY(1.12) translateX(0.5px); }
-  70% { opacity: 0.75; transform: scaleY(0.94) translateX(-0.5px); }
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scaleY(1);
+  }
+  35% {
+    opacity: 1;
+    transform: scaleY(1.12) translateX(0.5px);
+  }
+  70% {
+    opacity: 0.75;
+    transform: scaleY(0.94) translateX(-0.5px);
+  }
 }
 
 @keyframes ripple {
-  from { transform: scale(0.35); opacity: 0.7; }
-  to { transform: scale(1.15); opacity: 0; }
+  from {
+    transform: scale(0.35);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.15);
+    opacity: 0;
+  }
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(0) scale(1); opacity: 0; }
-  12% { opacity: 0.9; }
-  100% { transform: translateY(-56px) scale(1.25); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-56px) scale(1.25);
+    opacity: 0;
+  }
 }
 
 @keyframes driftX {
-  0% { transform: translateX(-8%); }
-  50% { transform: translateX(8%); }
-  100% { transform: translateX(-8%); }
+  0% {
+    transform: translateX(-8%);
+  }
+  50% {
+    transform: translateX(8%);
+  }
+  100% {
+    transform: translateX(-8%);
+  }
 }

@@ -131,8 +131,7 @@ export const VENUE = {
   tagline: "Hotel • Banquet • Pool",
   address:
     "Ramadhin Puram, Harpura, Behind Shanti Hospital / Near Chhaya Talkies & NCC Tiraha, Ballia–Bansdih Road, Tikhampur, Ballia, Uttar Pradesh 277001",
-  shortAddress:
-    "Ramadhin Puram, Harpura, Tikhampur, Ballia, Uttar Pradesh 277001",
+  shortAddress: "Ramadhin Puram, Harpura, Tikhampur, Ballia, Uttar Pradesh 277001",
   rating: "★ 4.4 (517+ Google Reviews)",
   lawns: "Gardenia One (The Grand Lawn, Gate 1) & Gardenia Two (The Royal Lawn, Gate 4)",
   stays: "12 AC Guest Rooms • Garden Swimming Pool • Valet Parking",

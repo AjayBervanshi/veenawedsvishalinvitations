@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { AudioProvider } from "@/components/AudioProvider";
 
 function NotFoundComponent() {
   return (
@@ -113,7 +114,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <AudioProvider>{children}</AudioProvider>
         <Scripts />
       </body>
     </html>
