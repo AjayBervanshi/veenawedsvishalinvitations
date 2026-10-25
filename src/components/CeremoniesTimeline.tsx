@@ -23,61 +23,63 @@ export const CeremoniesTimeline: React.FC<CeremoniesTimelineProps> = ({ events }
     const title = encodeURIComponent(`${event.title} - Veena & Vishal Wedding`);
     const details = encodeURIComponent(`${event.description}\nDress Code: ${event.dressCode || 'Traditional'}`);
     const location = encodeURIComponent(event.venue);
-    // Rough date format for quick calendar link
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
   };
 
   return (
-    <section className="relative w-full py-20 px-4 bg-[#290c05] overflow-hidden">
-      {/* Background Pillars Motif */}
-      <div 
-        className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-repeat-y bg-contain"
-        style={{ backgroundImage: 'url(/assets/mandir/pillar-backdrop-v1.webp)' }}
-      />
+    <section className="relative w-full py-12 px-4 bg-[#fbf5eb] overflow-hidden">
+      
+      {/* Decorative Royal Pillars Framing Left & Right */}
+      <div className="absolute top-0 bottom-0 left-0 w-8 md:w-16 pointer-events-none opacity-40 hidden sm:block">
+        <img src="/assets/mandir/pillar-left-v1.webp" alt="" className="w-full h-full object-repeat-y" />
+      </div>
+      <div className="absolute top-0 bottom-0 right-0 w-8 md:w-16 pointer-events-none opacity-40 hidden sm:block">
+        <img src="/assets/mandir/pillar-right-v1.webp" alt="" className="w-full h-full object-repeat-y" />
+      </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto">
+      <div className="relative z-10 max-w-2xl mx-auto">
         {/* Section Heading */}
-        <div className="text-center mb-12">
-          <p className="text-xs uppercase tracking-[0.25em] text-[#dda45d] font-serif mb-1">
+        <div className="text-center mb-8">
+          <p className="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-serif font-bold mb-1">
             Program & Itinerary
           </p>
-          <h2 className="text-3xl md:text-4xl font-serif text-[#f7e8d4] font-bold tracking-wide">
+          <h2 className="text-3xl md:text-4xl font-serif text-[#5f250f] font-bold tracking-wide">
             Wedding Timeline
           </h2>
-          <p className="text-sm text-[#f7e8d4]/70 font-serif italic mt-1">
+          <p className="text-xs md:text-sm text-[#5f250f]/75 font-serif italic mt-1">
             Mark your calendars, we can't wait to celebrate with you
           </p>
           <img 
             src="/assets/mandir/ornament-band-v1.webp" 
             alt="" 
-            className="w-48 h-auto mx-auto mt-4 opacity-75"
+            className="w-48 h-auto mx-auto mt-3 opacity-80"
           />
         </div>
 
         {/* Timeline Cards */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {events.map((event, idx) => (
             <motion.div
               key={event.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="relative rounded-3xl bg-[#391206]/85 border border-[#dda45d]/40 p-6 md:p-8 shadow-xl backdrop-blur-md hover:border-[#dda45d] transition-all"
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="relative rounded-2xl bg-[#ffffff] border-2 border-[#dda45d]/60 p-5 md:p-6 shadow-[0_6px_20px_rgba(95,37,15,0.08)] hover:border-[#dda45d] transition-all"
             >
               {/* Event Header with Icon & Hindi Title */}
-              <div className="flex items-start justify-between gap-4 border-b border-[#dda45d]/20 pb-4 mb-4">
+              <div className="flex items-start justify-between gap-3 border-b border-[#dda45d]/25 pb-3 mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-[#200702]/80 border border-[#dda45d]/40 shadow-inner">
+                  <div className="p-2.5 rounded-xl bg-[#5f250f] border border-[#dda45d] shadow-sm">
                     {getEventIcon(event.iconName)}
                   </div>
                   <div>
                     {event.hindiTitle && (
-                      <span className="block text-xs md:text-sm text-[#dda45d] font-serif tracking-wide font-semibold">
+                      <span className="block text-xs font-serif text-[#ab5626] font-bold tracking-wide">
                         {event.hindiTitle}
                       </span>
                     )}
-                    <h3 className="text-xl md:text-2xl font-serif font-bold text-[#f7e8d4]">
+                    <h3 className="text-lg md:text-xl font-serif font-bold text-[#5f250f]">
                       {event.title}
                     </h3>
                   </div>
@@ -88,37 +90,37 @@ export const CeremoniesTimeline: React.FC<CeremoniesTimelineProps> = ({ events }
                   href={createGoogleCalendarLink(event)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#dda45d]/50 bg-[#2b0e06] text-[11px] font-serif uppercase tracking-wider text-[#dda45d] hover:bg-[#dda45d] hover:text-[#2b0e06] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#dda45d] bg-[#fbf5eb] text-[10px] md:text-[11px] font-serif uppercase tracking-wider text-[#5f250f] font-bold hover:bg-[#dda45d] hover:text-[#5f250f] transition-colors"
                 >
-                  <Calendar className="w-3.5 h-3.5" />
+                  <Calendar className="w-3.5 h-3.5 text-[#ab5626]" />
                   <span>Add to Cal</span>
                 </a>
               </div>
 
               {/* Event Details Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm text-[#f7e8d4]/85 font-serif mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#5f250f]/85 font-serif mb-3">
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-[#dda45d] shrink-0" />
+                  <Calendar className="w-3.5 h-3.5 text-[#ab5626] shrink-0" />
                   <span>{event.date}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#dda45d] shrink-0" />
-                  <span>{event.time}</span>
+                  <Clock className="w-3.5 h-3.5 text-[#ab5626] shrink-0" />
+                  <span className="font-semibold text-[#5f250f]">{event.time}</span>
                 </div>
                 <div className="flex items-center gap-2 sm:col-span-2">
-                  <MapPin className="w-4 h-4 text-[#dda45d] shrink-0" />
+                  <MapPin className="w-3.5 h-3.5 text-[#ab5626] shrink-0" />
                   <span>{event.venue}</span>
                 </div>
               </div>
 
               {/* Description & Dress Code */}
-              <p className="text-xs md:text-sm text-[#f7e8d4]/70 font-serif leading-relaxed mb-4">
+              <p className="text-xs text-[#5f250f]/75 font-serif leading-relaxed mb-3">
                 {event.description}
               </p>
 
               {event.dressCode && (
-                <div className="inline-block px-3 py-1 rounded-lg bg-[#200702]/60 border border-[#dda45d]/20 text-[11px] text-[#dda45d] font-serif">
-                  <strong className="text-[#f7e8d4]">Dress Code:</strong> {event.dressCode}
+                <div className="inline-block px-3 py-1 rounded-lg bg-[#fbf5eb] border border-[#dda45d]/40 text-[11px] text-[#5f250f] font-serif">
+                  <strong className="text-[#ab5626]">Dress Code:</strong> {event.dressCode}
                 </div>
               )}
             </motion.div>

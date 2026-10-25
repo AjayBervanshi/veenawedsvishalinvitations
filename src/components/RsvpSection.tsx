@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, UserCheck, MessageSquareShare } from 'lucide-react';
+import { CheckCircle2, MessageSquareShare } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface RsvpSectionProps {
@@ -21,8 +21,8 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
 
     if (attendance === 'attending') {
       confetti({
-        particleCount: 100,
-        spread: 80,
+        particleCount: 90,
+        spread: 75,
         origin: { y: 0.6 }
       });
     }
@@ -40,46 +40,46 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
   };
 
   return (
-    <section className="relative w-full py-20 px-4 bg-[#290c05] overflow-hidden text-center">
+    <section className="relative w-full py-12 px-4 bg-[#fbf5eb] text-center">
       <div className="relative z-10 max-w-xl mx-auto">
-        <p className="text-xs uppercase tracking-[0.25em] text-[#dda45d] font-serif mb-1">
+        <p className="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-serif font-bold mb-1">
           Kindly Respond By 1st December 2026
         </p>
-        <h2 className="text-3xl md:text-4xl font-serif text-[#f7e8d4] font-bold tracking-wide mb-2">
+        <h2 className="text-2xl md:text-3xl font-serif text-[#5f250f] font-bold tracking-wide mb-1">
           Will You Join Us?
         </h2>
-        <p className="text-sm text-[#f7e8d4]/70 font-serif italic mb-8">
+        <p className="text-xs md:text-sm text-[#5f250f]/75 font-serif italic mb-6">
           Your presence will multiply our joy on this sacred milestone
         </p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-3xl bg-[#391206]/90 border border-[#dda45d]/40 p-6 md:p-8 shadow-2xl backdrop-blur-md text-left"
+          className="rounded-3xl bg-[#ffffff] border-2 border-[#dda45d]/60 p-6 md:p-8 shadow-[0_8px_25px_rgba(95,37,15,0.08)] text-left"
         >
           {submitted ? (
-            <div className="text-center py-8">
-              <CheckCircle2 className="w-16 h-16 text-[#dda45d] mx-auto mb-4" />
-              <h3 className="text-2xl font-serif font-bold text-[#f7e8d4] mb-2">
+            <div className="text-center py-6">
+              <CheckCircle2 className="w-14 h-14 text-[#dda45d] mx-auto mb-3" />
+              <h3 className="text-xl md:text-2xl font-serif font-bold text-[#5f250f] mb-2">
                 Thank You, {fullName}!
               </h3>
-              <p className="text-sm text-[#f7e8d4]/80 font-serif mb-6">
-                Your RSVP response has been recorded. We eagerly look forward to celebrating with you!
+              <p className="text-xs md:text-sm text-[#5f250f]/80 font-serif mb-5">
+                Your RSVP response has been recorded. We eagerly look forward to welcoming you!
               </p>
               <button
                 type="button"
                 onClick={handleWhatsAppRsvp}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider shadow-lg hover:brightness-105 active:scale-95 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:brightness-105 active:scale-95 transition-all"
               >
                 <MessageSquareShare className="w-4 h-4" />
                 <span>Confirm on WhatsApp</span>
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-serif uppercase tracking-wider text-[#dda45d] mb-1">
+                <label className="block text-[11px] font-serif uppercase tracking-wider text-[#ab5626] font-bold mb-1">
                   Full Name *
                 </label>
                 <input
@@ -88,12 +88,12 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Anil & Sunita Kapoor"
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#200702]/80 border border-[#dda45d]/30 text-[#f7e8d4] placeholder-[#f7e8d4]/30 focus:border-[#dda45d] focus:outline-none text-sm font-serif"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-[#5f250f] placeholder-[#5f250f]/40 focus:border-[#5f250f] focus:outline-none text-xs font-serif"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-serif uppercase tracking-wider text-[#dda45d] mb-1">
+                <label className="block text-[11px] font-serif uppercase tracking-wider text-[#ab5626] font-bold mb-1">
                   Phone Number / WhatsApp
                 </label>
                 <input
@@ -101,22 +101,22 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+91 98765 43210"
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#200702]/80 border border-[#dda45d]/30 text-[#f7e8d4] placeholder-[#f7e8d4]/30 focus:border-[#dda45d] focus:outline-none text-sm font-serif"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-[#5f250f] placeholder-[#5f250f]/40 focus:border-[#5f250f] focus:outline-none text-xs font-serif"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-serif uppercase tracking-wider text-[#dda45d] mb-2">
+                <label className="block text-[11px] font-serif uppercase tracking-wider text-[#ab5626] font-bold mb-2">
                   Will You Be Attending?
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2.5">
                   <button
                     type="button"
                     onClick={() => setAttendance('attending')}
-                    className={`p-3 rounded-xl border text-xs font-serif font-bold uppercase tracking-wider transition-all ${
+                    className={`py-2.5 px-3 rounded-xl border text-xs font-serif font-bold uppercase tracking-wider transition-all ${
                       attendance === 'attending'
-                        ? 'bg-[#dda45d] text-[#2b0e06] border-[#dda45d] shadow-lg'
-                        : 'bg-[#200702]/70 text-[#f7e8d4]/70 border-[#dda45d]/30 hover:border-[#dda45d]'
+                        ? 'bg-[#5f250f] text-[#dda45d] border-[#5f250f] shadow-md'
+                        : 'bg-[#fbf5eb] text-[#5f250f]/75 border-[#dda45d]/50 hover:border-[#5f250f]'
                     }`}
                   >
                     Joyfully Accept
@@ -124,10 +124,10 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
                   <button
                     type="button"
                     onClick={() => setAttendance('declined')}
-                    className={`p-3 rounded-xl border text-xs font-serif font-bold uppercase tracking-wider transition-all ${
+                    className={`py-2.5 px-3 rounded-xl border text-xs font-serif font-bold uppercase tracking-wider transition-all ${
                       attendance === 'declined'
-                        ? 'bg-[#8b1d24] text-white border-[#8b1d24] shadow-lg'
-                        : 'bg-[#200702]/70 text-[#f7e8d4]/70 border-[#dda45d]/30 hover:border-[#dda45d]'
+                        ? 'bg-[#8b1d24] text-white border-[#8b1d24] shadow-md'
+                        : 'bg-[#fbf5eb] text-[#5f250f]/75 border-[#dda45d]/50 hover:border-[#5f250f]'
                     }`}
                   >
                     Regretfully Decline
@@ -136,15 +136,15 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
               </div>
 
               {attendance === 'attending' && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <div>
-                    <label className="block text-xs font-serif uppercase tracking-wider text-[#dda45d] mb-1">
+                    <label className="block text-[11px] font-serif uppercase tracking-wider text-[#ab5626] font-bold mb-1">
                       Number of Guests
                     </label>
                     <select
                       value={guestCount}
                       onChange={(e) => setGuestCount(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#200702]/80 border border-[#dda45d]/30 text-[#f7e8d4] focus:border-[#dda45d] focus:outline-none text-sm font-serif"
+                      className="w-full px-3.5 py-2 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-[#5f250f] focus:border-[#5f250f] focus:outline-none text-xs font-serif"
                     >
                       <option value="1">1 (Just me)</option>
                       <option value="2">2 (Couple)</option>
@@ -155,13 +155,13 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-serif uppercase tracking-wider text-[#dda45d] mb-1">
+                    <label className="block text-[11px] font-serif uppercase tracking-wider text-[#ab5626] font-bold mb-1">
                       Dietary Preference
                     </label>
                     <select
                       value={dietary}
                       onChange={(e) => setDietary(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#200702]/80 border border-[#dda45d]/30 text-[#f7e8d4] focus:border-[#dda45d] focus:outline-none text-sm font-serif"
+                      className="w-full px-3.5 py-2 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-[#5f250f] focus:border-[#5f250f] focus:outline-none text-xs font-serif"
                     >
                       <option value="Vegetarian">Pure Vegetarian</option>
                       <option value="Jain Vegetarian">Jain Vegetarian</option>
@@ -170,10 +170,10 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ hashtag }) => {
                 </div>
               )}
 
-              <div className="pt-4">
+              <div className="pt-3">
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#b87c33] via-[#dda45d] to-[#b87c33] text-[#2b0e06] font-bold text-xs uppercase tracking-widest shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
+                  className="w-full py-3 rounded-full bg-[#5f250f] text-[#dda45d] font-bold text-xs uppercase tracking-widest shadow-md hover:scale-[1.01] active:scale-95 transition-all"
                 >
                   Submit RSVP
                 </button>

@@ -3,7 +3,17 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  :root {
+    --m-ink: #5f250f;
+    --m-rust: #ab5626;
+    --m-gold: #dda45d;
+    --m-parchment: #fbf5eb;
+    --m-cream: #fdfaf4;
+  }
+
+  body {
+    background-color: #fbf5eb;
+    color: var(--m-ink);
     scroll-behavior: smooth;
     font-family: 'Marcellus', 'Georgia', serif;
   }
@@ -11,17 +21,17 @@
 
 /* Custom Royal Indian Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #2b0e06;
+  background: #fbf5eb;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b87c33;
+  background: #dda45d;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #dda45d;
+  background: #ab5626;
 }
 
 /* Bell Swing Animation */
@@ -53,8 +63,25 @@
 /* Cloud drift */
 @keyframes cloud-float {
   0% { transform: translateX(0); }
-  50% { transform: translateX(-25px); }
+  50% { transform: translateX(-35px); }
   100% { transform: translateX(0); }
+}
+
+/* Gentle Falling Petals */
+@keyframes petalFall {
+  0% {
+    top: -20px;
+    transform: translateX(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(40px) rotate(180deg);
+  }
+  100% {
+    top: 105vh;
+    transform: translateX(-30px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 .animate-swing-left {
@@ -73,16 +100,12 @@
 }
 
 .animate-clouds {
-  animation: cloud-float 16s ease-in-out infinite alternate;
+  animation: cloud-float 18s ease-in-out infinite alternate;
 }
 
-/* Gold Gradient Shimmer */
+/* Gold Foil Gradient Shimmer */
 .gold-shimmer {
-  background: linear-gradient(135deg, #b87c33 0%, #f7e8d4 50%, #dda45d 100%);
+  background: linear-gradient(135deg, #ab5626 0%, #dda45d 50%, #ab5626 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.gold-border {
-  border-image: linear-gradient(to bottom right, #dda45d, #78350f, #dda45d) 1;
 }
