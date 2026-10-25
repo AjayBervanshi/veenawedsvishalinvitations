@@ -51,7 +51,7 @@ export const OpeningCurtain: React.FC<OpeningCurtainProps> = ({
             <div className="flex flex-col items-center justify-center mb-4">
               <img 
                 src="/assets/mandir/ganpati-icon-v1.webp" 
-                alt="Lord Ganesha" 
+                alt="Lord Ganesha Envelope Icon" 
                 className="w-14 h-14 drop-shadow-sm mb-1.5 object-contain"
               />
               <span className="text-[#5f250f] text-sm tracking-widest font-serif font-bold">

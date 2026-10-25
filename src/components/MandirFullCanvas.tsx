@@ -192,8 +192,9 @@ export const MandirFullCanvas: React.FC = () => {
               className="relative z-10"
             >
               <img 
+                id="hero-ganesh-icon"
                 src="/assets/mandir/ganpati-icon-v1.webp" 
-                alt="Lord Ganesha" 
+                alt="Lord Ganesha Sacred Invocation" 
                 className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain drop-shadow-[0_10px_25px_rgba(221,164,93,0.5)] filter brightness-110 hover:scale-105 transition-transform duration-300" 
               />
             </motion.div>
