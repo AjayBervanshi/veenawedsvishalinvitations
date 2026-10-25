@@ -14,7 +14,8 @@ import {
   ChevronDown, 
   Sparkles,
   Sun,
-  Flame
+  Flame,
+  Volume2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -22,15 +23,22 @@ export const MandirFullCanvas: React.FC = () => {
   // Scrollytelling scroll tracking for Couple Names & Parallax Layers
   const { scrollY } = useScroll();
 
-  // Couple names transition: Appear on load, smoothly dissolve & lift as user scrolls away
-  const heroOpacity = useTransform(scrollY, [0, 260], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 260], [1, 0.94]);
-  const heroTranslateY = useTransform(scrollY, [0, 260], [0, -35]);
+  // Dynamic Scrollytelling Transitions:
+  // As user scrolls from 0 to 300px, the hero card gracefully dissolves and lifts into the heavens
+  const heroCardOpacity = useTransform(scrollY, [0, 260], [1, 0]);
+  const heroCardScale = useTransform(scrollY, [0, 260], [1, 0.94]);
+  const heroCardY = useTransform(scrollY, [0, 260], [0, -45]);
 
-  // Multi-layered Parallax depth: Temple rises, Sun drifts gently, Clouds slide
-  const templeTranslateY = useTransform(scrollY, [0, 400], [0, -30]);
-  const sunTranslateY = useTransform(scrollY, [0, 400], [0, 20]);
-  const cloudsTranslateX = useTransform(scrollY, [0, 400], [0, 25]);
+  // Sacred arch and bells drift upward
+  const archOpacity = useTransform(scrollY, [0, 220], [1, 0]);
+  const archY = useTransform(scrollY, [0, 220], [0, -30]);
+
+  // Background Sun & Clouds parallax
+  const sunY = useTransform(scrollY, [0, 500], [0, 25]);
+  const cloudsDrift = useTransform(scrollY, [0, 500], [0, 35]);
+
+  // Temple Crest Parallax: Ascends from below to meet the reader
+  const templeCrestY = useTransform(scrollY, [0, 450], [0, -30]);
 
   // Bell chime & celebratory confetti
   const [bellRinging, setBellRinging] = useState(false);
@@ -38,15 +46,15 @@ export const MandirFullCanvas: React.FC = () => {
     soundManager.playBellChime();
     setBellRinging(true);
     confetti({
-      particleCount: 50,
-      spread: 70,
-      origin: { y: 0.2 },
+      particleCount: 55,
+      spread: 75,
+      origin: { y: 0.22 },
       colors: ['#dda45d', '#e67e22', '#f39c12', '#e74c3c']
     });
     setTimeout(() => setBellRinging(false), 900);
   };
 
-  // Countdown calculation
+  // Auspicious Countdown calculation
   const calculateTimeLeft = () => {
     const diff = +new Date(weddingData.weddingDateISO) - +new Date();
     if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -128,152 +136,238 @@ export const MandirFullCanvas: React.FC = () => {
     <div className="w-full bg-[#fbf5eb] text-[#5f250f] min-h-screen overflow-x-hidden selection:bg-[#dda45d]/40">
       
       {/* ============================================================== */}
-      {/* 1. HERO SCENE: MULTI-LAYER SCROLLYTELLING STAGE                */}
+      {/* 1. BESPOKE ROYAL HERO SANCTUM (CUSTOM DESIGNED & ANIMATED)     */}
       {/* ============================================================== */}
-      <section className="relative w-full overflow-hidden bg-[#fbf5eb] pt-2 md:pt-6 pb-2 flex flex-col items-center justify-between min-h-[95vh] md:min-h-screen">
+      <section 
+        className="relative w-full overflow-hidden pt-4 md:pt-6 pb-2 flex flex-col items-center justify-between min-h-[96vh] md:min-h-screen"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 20%, rgba(254, 243, 199, 0.75) 0%, rgba(251, 245, 235, 0.95) 55%, #fbf5eb 100%)'
+        }}
+      >
         
-        {/* Layer 1: Sky Backdrop */}
+        {/* Ambient Subtle Sky Pattern */}
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-90"
+          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-25 mix-blend-multiply"
           style={{ backgroundImage: 'url(/assets/mandir/sky-v1.webp)' }}
         />
 
-        {/* Layer 2: Radiant Golden Sun with Parallax */}
+        {/* Radiant Golden Surya with Gentle Pulsing Aura */}
         <motion.div 
-          style={{ y: sunTranslateY }}
-          className="absolute top-8 md:top-12 left-1/2 -translate-x-1/2 z-0 pointer-events-none opacity-85"
+          style={{ y: sunY }}
+          className="absolute top-4 md:top-8 left-1/2 -translate-x-1/2 z-0 pointer-events-none opacity-85"
         >
           <img 
             src="/assets/mandir/sun-v1.webp" 
             alt="Surya" 
-            className="w-48 md:w-72 lg:w-96 h-auto drop-shadow-[0_0_60px_rgba(221,164,93,0.7)] animate-pulse"
+            className="w-44 md:w-64 lg:w-80 h-auto drop-shadow-[0_0_80px_rgba(221,164,93,0.8)] animate-pulse"
             style={{ animationDuration: '6s' }}
           />
         </motion.div>
 
-        {/* Layer 3: Distant Mountain Silhouette */}
-        <div className="absolute top-36 md:top-52 w-full z-10 pointer-events-none opacity-45">
-          <img src="/assets/mandir/mountain-v1.webp" alt="Mountains" className="w-full object-cover max-h-48 md:max-h-64" />
-        </div>
-
-        {/* Layer 4: Floating Clouds with Parallax Drift */}
+        {/* Ethereal Floating Clouds (Soft Blurred Drift, Zero Harsh Edges) */}
         <motion.div 
-          style={{ x: cloudsTranslateX }}
-          className="absolute top-24 md:top-36 w-full z-10 pointer-events-none opacity-70 animate-clouds"
+          style={{ x: cloudsDrift }}
+          className="absolute top-12 md:top-20 w-full z-10 pointer-events-none opacity-45 animate-clouds"
         >
-          <img src="/assets/mandir/cloud-v1.webp" alt="Clouds" className="w-full object-cover" />
+          <img src="/assets/mandir/cloud-v1.webp" alt="Clouds" className="w-full object-cover filter blur-[0.5px]" />
         </motion.div>
 
-        {/* Layer 5: Top Temple Arch with Interactive Bells */}
-        <div className="relative z-30 w-full max-w-lg md:max-w-xl pt-2 px-4 flex flex-col items-center">
-          <img src="/assets/mandir/bell-arch-v1.webp" alt="Arch" className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto object-contain drop-shadow" />
+        {/* ========================================================== */}
+        {/* SACRED ARCH, GANESHA INVOCATION & PENDULUM BELLS           */}
+        {/* ========================================================== */}
+        <motion.div 
+          style={{ opacity: archOpacity, y: archY }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-30 w-full max-w-2xl px-4 flex flex-col items-center"
+        >
+          {/* Traditional Royal Toran / Garland Arch in Pure SVG */}
+          <div className="w-full max-w-md mx-auto mb-1 flex justify-center">
+            <svg viewBox="0 0 400 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto drop-shadow-sm opacity-90">
+              <path d="M10 5 Q 100 32 200 8 Q 300 32 390 5" stroke="#dda45d" strokeWidth="2.5" fill="none" />
+              <path d="M10 8 Q 100 35 200 11 Q 300 35 390 8" stroke="#ab5626" strokeWidth="1" strokeDasharray="4 4" fill="none" />
+              {/* Marigold Swags */}
+              {[40, 90, 140, 190, 240, 290, 340].map((cx, idx) => (
+                <circle key={idx} cx={cx} cy={idx % 2 === 0 ? 18 : 22} r="5" fill="#f39c12" stroke="#d35400" strokeWidth="1" />
+              ))}
+              <circle cx="200" cy="10" r="7" fill="#dda45d" stroke="#5f250f" strokeWidth="1.5" />
+            </svg>
+          </div>
           
-          <div className="w-full max-w-xs md:max-w-sm -mt-2 md:-mt-4 flex justify-between px-6 md:px-10 items-start">
+          {/* Symmetrical Hanging Brass Bells & Sacred Ganesha Inscription */}
+          <div className="w-full max-w-lg flex justify-between items-center px-4 sm:px-8">
+            
+            {/* Left Hanging Temple Bell */}
             <button 
               type="button" 
               onClick={ringBell} 
               title="Tap to ring temple bell" 
-              className="cursor-pointer focus:outline-none transition-transform hover:scale-110 active:scale-95"
+              className="cursor-pointer focus:outline-none transition-transform hover:scale-120 active:scale-95 group flex flex-col items-center"
             >
               <img 
-                src="/assets/mandir/bell-a-v1.png" 
-                alt="Bell" 
-                className={`w-8 md:w-11 h-auto animate-swing-left drop-shadow ${bellRinging ? 'scale-125' : ''}`} 
+                src="/assets/mandir/bell-cup-a.png" 
+                alt="Temple Bell" 
+                className={`w-9 md:w-12 h-auto animate-swing-left drop-shadow-md transition-transform ${bellRinging ? 'scale-125' : ''}`} 
               />
+              <span className="sr-only">Ring Bell</span>
             </button>
             
-            {/* Sacred Ganesha Invocation */}
-            <div className="flex flex-col items-center">
-              <img src="/assets/mandir/ganpati-icon-v1.webp" alt="Ganesha" className="w-11 h-11 md:w-15 md:h-15 object-contain drop-shadow" />
-              <span className="text-[#5f250f] text-xs md:text-sm font-serif font-bold tracking-widest mt-1">
+            {/* Center: Lord Ganesha & Sacred Vedic Shloka */}
+            <div className="flex flex-col items-center text-center px-2">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+                className="relative"
+              >
+                <img 
+                  src="/assets/mandir/ganpati-icon-v1.webp" 
+                  alt="Lord Ganesha" 
+                  className="w-11 h-11 md:w-14 md:h-14 object-contain drop-shadow-md filter brightness-105" 
+                />
+              </motion.div>
+              
+              <span className="text-[#5f250f] text-xs md:text-sm font-serif font-bold tracking-[0.2em] mt-0.5 drop-shadow-sm">
                 || श्री गणेशाय नमः ||
               </span>
-              <img src="/assets/mandir/shri-line-v1.webp" alt="" className="w-32 md:w-44 h-auto opacity-75 mt-0.5" />
+              
+              <p className="text-[10px] md:text-[11px] text-[#ab5626] font-serif font-semibold italic mt-0.5 max-w-xs md:max-w-sm tracking-wide leading-tight">
+                वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+              </p>
+              
+              <div className="flex items-center justify-center gap-2 mt-1 opacity-70">
+                <span className="w-12 h-px bg-[#dda45d]" />
+                <span className="text-[#dda45d] text-[10px]">✦</span>
+                <span className="w-12 h-px bg-[#dda45d]" />
+              </div>
             </div>
 
+            {/* Right Hanging Temple Bell */}
             <button 
               type="button" 
               onClick={ringBell} 
               title="Tap to ring temple bell" 
-              className="cursor-pointer focus:outline-none transition-transform hover:scale-110 active:scale-95"
+              className="cursor-pointer focus:outline-none transition-transform hover:scale-120 active:scale-95 group flex flex-col items-center"
             >
               <img 
-                src="/assets/mandir/bell-b-v1.png" 
-                alt="Bell" 
-                className={`w-8 md:w-11 h-auto animate-swing-right drop-shadow ${bellRinging ? 'scale-125' : ''}`} 
+                src="/assets/mandir/bell-cup-b.png" 
+                alt="Temple Bell" 
+                className={`w-9 md:w-12 h-auto animate-swing-right drop-shadow-md transition-transform ${bellRinging ? 'scale-125' : ''}`} 
               />
+              <span className="sr-only">Ring Bell</span>
             </button>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Layer 6: Dynamic Scrollytelling Couple Hero Card */}
-        {/* Entrance: Springs in. Exit: Dissolves & lifts gracefully on scroll */}
+        {/* ========================================================== */}
+        {/* COUPLE GRAND REVEAL CARD WITH SCROLLYTELLING TRANSITIONS   */}
+        {/* ========================================================== */}
         <motion.div
-          style={{ opacity: heroOpacity, scale: heroScale, y: heroTranslateY }}
-          initial={{ opacity: 0, y: 35, scale: 0.95 }}
+          style={{ opacity: heroCardOpacity, scale: heroCardScale, y: heroCardY }}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, ease: 'easeOut' }}
-          className="relative z-30 w-11/12 max-w-lg md:max-w-xl mx-auto my-3 md:my-4 text-center px-6 md:px-10 py-5 md:py-7 rounded-3xl bg-white/95 border-2 border-[#dda45d] shadow-[0_15px_40px_rgba(95,37,15,0.12)] backdrop-blur-sm"
+          transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-30 w-11/12 max-w-lg md:max-w-xl mx-auto my-2 md:my-3 text-center px-6 sm:px-10 md:px-12 py-5 md:py-6 rounded-3xl bg-white/95 border-2 border-[#dda45d] shadow-[0_20px_50px_rgba(95,37,15,0.13)] backdrop-blur-md"
         >
-          {/* Top Peacock Ornament */}
-          <div className="flex justify-center -mt-10 md:-mt-12 mb-1">
-            <img src="/assets/mandir/peacock-ornament-v1.webp" alt="" className="w-12 md:w-15 h-auto drop-shadow" />
+          {/* Top Decorative Peacock Ornament */}
+          <div className="flex justify-center -mt-10 md:-mt-11 mb-1">
+            <div className="p-1.5 rounded-full bg-[#fbf5eb] border border-[#dda45d] shadow-sm">
+              <img src="/assets/mandir/peacock-ornament-v1.webp" alt="" className="w-10 md:w-13 h-auto drop-shadow" />
+            </div>
           </div>
 
-          <p className="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-serif font-bold mb-1">
+          {/* Invitation Host Salutation */}
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.28em] text-[#ab5626] font-serif font-bold mb-1">
             With Joy & Deep Gratitude
           </p>
-          <p className="text-xs md:text-sm text-[#5f250f]/85 font-serif leading-relaxed mb-2">
+          <p className="text-xs md:text-sm text-[#5f250f]/85 font-serif leading-relaxed mb-2.5 max-w-md mx-auto">
             {weddingData.hostMessage}
           </p>
 
-          {/* Calligraphy Names */}
+          {/* Calligraphy Bride & Groom Names with Animated Entrance & Hover Glow */}
           <div className="my-1">
-            <h1 
-              className="text-5xl sm:text-6xl md:text-7xl text-[#5f250f] tracking-wide" 
+            
+            {/* Bride's Name */}
+            <motion.h1 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.35 }}
+              className="text-5xl sm:text-6xl md:text-7xl text-[#5f250f] tracking-wide transition-colors duration-300 hover:text-[#ab5626]" 
               style={{ fontFamily: 'var(--mandir-script)' }}
             >
               {weddingData.brideName}
-            </h1>
+            </motion.h1>
+            
+            <p className="text-xs md:text-sm text-[#5f250f]/75 font-serif italic -mt-1 mb-1">
+              Daughter of {weddingData.brideParents}
+            </p>
 
-            <span className="inline-block my-0.5 text-2xl md:text-3xl text-[#dda45d] font-bold" style={{ fontFamily: 'var(--mandir-script)' }}>
-              weds
-            </span>
+            {/* Sacred Connective Script */}
+            <div className="flex items-center justify-center gap-3 my-0.5">
+              <span className="w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-[#dda45d] to-transparent" />
+              <span className="text-2xl md:text-3xl text-[#dda45d] font-bold" style={{ fontFamily: 'var(--mandir-script)' }}>
+                weds
+              </span>
+              <span className="w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-[#dda45d] to-transparent" />
+            </div>
 
-            <h1 
-              className="text-5xl sm:text-6xl md:text-7xl text-[#5f250f] tracking-wide" 
+            {/* Groom's Name */}
+            <motion.h1 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.55 }}
+              className="text-5xl sm:text-6xl md:text-7xl text-[#5f250f] tracking-wide transition-colors duration-300 hover:text-[#ab5626]" 
               style={{ fontFamily: 'var(--mandir-script)' }}
             >
               {weddingData.groomName}
-            </h1>
+            </motion.h1>
+
+            <p className="text-xs md:text-sm text-[#5f250f]/75 font-serif italic -mt-1 mb-2">
+              Son of {weddingData.groomParents}
+            </p>
           </div>
 
           {/* Auspicious Muhurat Pill */}
-          <div className="inline-block px-5 py-2 rounded-full bg-[#5f250f] text-[#dda45d] text-xs md:text-sm font-serif font-bold tracking-wider shadow-sm mt-2">
-            {weddingData.weddingDateDisplay} • शुभ मुहूर्त
+          <div className="inline-flex flex-col sm:flex-row items-center gap-1.5 px-6 py-2 rounded-full bg-[#5f250f] text-[#dda45d] text-xs md:text-sm font-serif font-bold tracking-wider shadow-md mt-1">
+            <span>{weddingData.weddingDateDisplay}</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="text-[#fff0d4]">शुभ मुहूर्त (सात फेरे)</span>
           </div>
 
+          <p className="text-[11px] md:text-xs text-[#ab5626] font-serif font-semibold mt-1.5">
+            Hotel Adarsh Vatika • Ballia, Uttar Pradesh
+          </p>
+
           {/* Fluttering Saffron Temple Flag */}
-          <div className="absolute -top-6 md:-top-8 -right-2 md:-right-3 flex items-start pointer-events-none">
-            <img src="/assets/mandir/flag-pole-v1.webp" alt="" className="w-3 md:w-4 h-18 md:h-22 object-contain" />
-            <img src="/assets/mandir/flag-cloth-v1.png" alt="" className="w-10 md:w-13 h-auto -ml-1 -mt-1 animate-flag" />
+          <div className="absolute -top-6 md:-top-7 -right-2 md:-right-3 flex items-start pointer-events-none">
+            <img src="/assets/mandir/flag-pole-v1.webp" alt="" className="w-3 md:w-4 h-18 md:h-20 object-contain" />
+            <img src="/assets/mandir/flag-cloth-v1.png" alt="" className="w-10 md:w-12 h-auto -ml-1 -mt-1 animate-flag" />
+          </div>
+
+          {/* Subtle Bell Chime Hint Button */}
+          <div className="mt-2.5 pt-2 border-t border-[#dda45d]/20 flex items-center justify-center gap-1.5 text-[11px] text-[#5f250f]/60 font-serif italic">
+            <Volume2 className="w-3.5 h-3.5 text-[#dda45d]" />
+            <span>Tap temple bells to receive divine blessings</span>
           </div>
         </motion.div>
 
-        {/* Layer 7: Rising Mandir Crest Spire with Parallax (Clipped to Crest, NO blank space!) */}
+        {/* ========================================================== */}
+        {/* PARALLAX MANDIR CREST (TRANSITIONS INTO THE ITINERARY)     */}
+        {/* ========================================================== */}
         <motion.div 
-          style={{ y: templeTranslateY }}
-          className="relative z-20 w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto -mt-4 md:-mt-6 pointer-events-none"
+          style={{ y: templeCrestY }}
+          className="relative z-20 w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto -mt-2 md:-mt-5 pointer-events-none"
         >
           <img 
             src="/assets/mandir/temple-crest.webp" 
             alt="Sacred Mandir" 
-            className="w-full h-auto drop-shadow-[0_-15px_30px_rgba(95,37,15,0.2)]" 
+            className="w-full h-auto drop-shadow-[0_-15px_30px_rgba(95,37,15,0.18)]" 
           />
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <div className="relative z-30 pb-3 flex flex-col items-center text-[#5f250f] font-serif">
+        {/* Gentle Scroll Indicator */}
+        <div className="relative z-30 pb-2 flex flex-col items-center text-[#5f250f] font-serif">
           <span className="text-[10px] md:text-xs uppercase tracking-widest font-semibold mb-0.5">
             Scroll to Explore Multiday Celebrations
           </span>
