@@ -1,0 +1,1103 @@
+{
+  "title": "Veena & Vishal Wedding Invitation | \u0950 \u0936\u094d\u0930\u0940 \u0917\u0923\u0947\u0936\u093e\u092f \u0928\u092e\u0903",
+  "cdp_metrics": {
+    "initial": {
+      "Timestamp": 376717.743469,
+      "AudioHandlers": 0,
+      "AudioWorkletProcessors": 0,
+      "Documents": 3,
+      "Frames": 1,
+      "JSEventListeners": 199,
+      "LayoutObjects": 535,
+      "MediaKeySessions": 0,
+      "MediaKeys": 0,
+      "Nodes": 594,
+      "Resources": 68,
+      "ContextLifecycleStateObservers": 9,
+      "V8PerContextDatas": 4,
+      "WorkerGlobalScopes": 0,
+      "UACSSResources": 0,
+      "RTCPeerConnections": 0,
+      "ResourceFetchers": 3,
+      "AdSubframes": 0,
+      "DetachedScriptStates": 2,
+      "ArrayBufferContents": 0,
+      "LayoutCount": 105,
+      "RecalcStyleCount": 107,
+      "LayoutDuration": 0.158314,
+      "RecalcStyleDuration": 0.108124,
+      "DevToolsCommandDuration": 0.002645,
+      "ScriptDuration": 0.157132,
+      "V8CompileDuration": 0,
+      "TaskDuration": 0.648356,
+      "TaskOtherDuration": 0.222141,
+      "ThreadTime": 0.798977,
+      "ProcessTime": 1.663887,
+      "JSHeapUsedSize": 10240464,
+      "JSHeapTotalSize": 16195584,
+      "FirstMeaningfulPaint": 376715.997571,
+      "DomContentLoaded": 376715.624911,
+      "NavigationStart": 376715.255154
+    },
+    "final": {
+      "Timestamp": 376727.865761,
+      "AudioHandlers": 0,
+      "AudioWorkletProcessors": 0,
+      "Documents": 1,
+      "Frames": 1,
+      "JSEventListeners": 210,
+      "LayoutObjects": 503,
+      "MediaKeySessions": 0,
+      "MediaKeys": 0,
+      "Nodes": 575,
+      "Resources": 50,
+      "ContextLifecycleStateObservers": 10,
+      "V8PerContextDatas": 2,
+      "WorkerGlobalScopes": 0,
+      "UACSSResources": 0,
+      "RTCPeerConnections": 0,
+      "ResourceFetchers": 1,
+      "AdSubframes": 0,
+      "DetachedScriptStates": 0,
+      "ArrayBufferContents": 0,
+      "LayoutCount": 725,
+      "RecalcStyleCount": 767,
+      "LayoutDuration": 0.21114,
+      "RecalcStyleDuration": 0.518121,
+      "DevToolsCommandDuration": 0.070032,
+      "ScriptDuration": 0.409935,
+      "V8CompileDuration": 0,
+      "TaskDuration": 2.374055,
+      "TaskOtherDuration": 1.164827,
+      "ThreadTime": 2.248206,
+      "ProcessTime": 4.436796,
+      "JSHeapUsedSize": 12325756,
+      "JSHeapTotalSize": 21020672,
+      "FirstMeaningfulPaint": 376715.997571,
+      "DomContentLoaded": 376715.624911,
+      "NavigationStart": 376715.255154
+    }
+  },
+  "network_requests": [
+    {
+      "url": "http://localhost:5173/",
+      "status": 200,
+      "contentType": "text/html"
+    },
+    {
+      "url": "http://localhost:5173/src/main.tsx?t=1792928845486",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/@vite/client",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/@react-refresh",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/react.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/App.tsx?t=1792928845486",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/vite/dist/client/env.mjs",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/index.css?t=1792928845486",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-PR4QN5HX.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/components/AudioDock.tsx",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-YHPANKLD.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/components/MandirFullCanvas.tsx?t=1792928845486",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/components/OpeningCurtain.tsx",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/data/weddingData.ts",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/components/FloatingPetals.tsx",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-FD5SMSK5.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/utils/sound.ts",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/components/AnimatedJourneyVisual.tsx",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/src/components/Mandir3DStage.tsx?t=1792928845486",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/canvas-confetti.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/framer-motion.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/lucide-react.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-7CC4PDZ5.js?v=3284dafa",
+      "status": 200,
+      "contentType": "text/javascript"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800;900&family=Marcellus&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700;1,900&family=Rozha+One&family=Yatra+One&family=Pinyon+Script&display=swap",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/cloud-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/ganpati-icon-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/shri-line-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/bell-a-v1.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/sun-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/cloud_left.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/cloud_right.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/mandir.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/garden.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/couple.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/ornament-band-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/icon-parking-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/countdown-divider-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/icon-weather-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/peacock-backdrop-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/sky-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/chime-v1.mp3",
+      "status": 206,
+      "contentType": "audio/mpeg"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rozhaone/v17/AlZy_zVFtYP12Zncg2kRcn35.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZoadlESTE.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rozhaone/v17/AlZy_zVFtYP12Zncg2kRc335bB0.woff2",
+      "status": 200,
+      "contentType": "font/woff2"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/ganpati-icon-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "url": "http://localhost:5173/assets/mandir/ganpati-icon-v1.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    }
+  ],
+  "console_messages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "line": 788,
+        "column": 8,
+        "lineNumber": 788,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:5173/node_modules/.vite/deps/chunk-FD5SMSK5.js?v=3284dafa",
+        "line": 21608,
+        "column": 24,
+        "lineNumber": 21608,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "line": 911,
+        "column": 14,
+        "lineNumber": 911,
+        "columnNumber": 14
+      }
+    }
+  ],
+  "computed_elements": {
+    "hero": {
+      "ganesh": {
+        "top": 51.89900207519531,
+        "bottom": 195.8990020751953,
+        "left": 648,
+        "width": 144,
+        "height": 144,
+        "opacity": "1",
+        "transform": "none"
+      },
+      "bride": {
+        "top": 396,
+        "bottom": 524,
+        "left": 288,
+        "width": 864,
+        "height": 128,
+        "opacity": "1",
+        "transform": "none"
+      },
+      "groom": {
+        "top": 616,
+        "bottom": 744,
+        "left": 288,
+        "width": 864,
+        "height": 128,
+        "opacity": "1",
+        "transform": "none"
+      },
+      "weds": {
+        "top": 560,
+        "bottom": 608,
+        "left": 673.140625,
+        "width": 93.703125,
+        "height": 48,
+        "opacity": "1",
+        "transform": "none"
+      },
+      "audioBtnExists": true
+    }
+  },
+  "scroll_trace": [
+    {
+      "scrollY": 0,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 1094,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 1598,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 1794,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 1140,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 1158,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 150,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 944,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 1448,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 1644,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 990,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 1008,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 300,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 794,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 1298,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 1494,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 840,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 858,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 450,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 644,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 1148,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 1344,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 690,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 708,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 600,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 494,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 998,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 1194,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 540,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 558,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 750,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 344,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 848,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 1044,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 390,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 408,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 900,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 194,
+        "h": 440,
+        "w": 634,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 698,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 894,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 240,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 258,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1050,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": 41,
+        "h": 469,
+        "w": 676,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 548,
+        "h": 394,
+        "w": 752,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 744,
+        "h": 128,
+        "w": 88,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": 90,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": 108,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1200,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -111,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 380,
+        "h": 402,
+        "w": 766,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 579,
+        "h": 130,
+        "w": 89,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -60,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -42,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1350,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -261,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 187,
+        "h": 419,
+        "w": 798,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 395,
+        "h": 136,
+        "w": 93,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -210,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -192,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1500,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -411,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": 35,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 242,
+        "h": 138,
+        "w": 94,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -360,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -342,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1650,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -561,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -115,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": 57,
+        "h": 157,
+        "w": 107,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -510,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -492,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1800,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -711,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -265,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -113,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -660,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -642,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 1950,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -861,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -415,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -263,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -810,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -792,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 2100,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -1011,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -565,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -413,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -960,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -942,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 2250,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -1161,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -715,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -563,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -1110,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -1092,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 2400,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -1311,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -865,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -713,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -1260,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -1242,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 2550,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -1461,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -1015,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -863,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -1410,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -1392,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 2700,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -1611,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -1165,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -1013,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -1560,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -1542,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    },
+    {
+      "scrollY": 2850,
+      "brideOpacity": "1.00",
+      "mandir": {
+        "y": -1761,
+        "h": 500,
+        "w": 720,
+        "opacity": "1.00"
+      },
+      "garden": {
+        "y": -1315,
+        "h": 420,
+        "w": 800,
+        "opacity": "1.00"
+      },
+      "couple": {
+        "y": -1163,
+        "h": 162,
+        "w": 111,
+        "opacity": "1.00"
+      },
+      "cloudL": {
+        "y": -1710,
+        "h": 286,
+        "w": 241,
+        "opacity": "1.00"
+      },
+      "cloudR": {
+        "y": -1692,
+        "h": 249,
+        "w": 241,
+        "opacity": "1.00"
+      }
+    }
+  ],
+  "identified_bugs": [],
+  "fixes_applied": []
+}

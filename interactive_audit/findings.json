@@ -1,0 +1,17 @@
+[
+  {
+    "category": "CONSOLE",
+    "detail": "[vite] connecting...",
+    "severity": "info"
+  },
+  {
+    "category": "CONSOLE",
+    "detail": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "severity": "info"
+  },
+  {
+    "category": "CONSOLE",
+    "detail": "[vite] connected.",
+    "severity": "info"
+  }
+]

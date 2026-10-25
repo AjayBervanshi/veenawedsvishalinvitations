@@ -26,10 +26,9 @@ export const Mandir3DStage: React.FC = () => {
   const mandirScale = useTransform(smoothProgress, [0.00, 0.24], [0.88, 1]);
   const mandirY = useTransform(smoothProgress, [0.00, 0.24], [-25, 0]);
 
-  // STEP 2: GARDEN - Appears next, aligning top edge perfectly with mandir base
+  // STEP 2: GARDEN - Appears next, locked seamlessly to mandir base
   const gardenOpacity = useTransform(smoothProgress, [0.20, 0.44], [0, 1]);
-  const gardenY = useTransform(smoothProgress, [0.20, 0.46], [50, 0]);
-  const gardenScale = useTransform(smoothProgress, [0.20, 0.46], [0.94, 1]);
+  const gardenScale = useTransform(smoothProgress, [0.20, 0.46], [0.96, 1]);
 
   // STEP 3: CLOUDS - Shrunk scale, slide in subtly from left and right side edges
   const cloudLeftOpacity = useTransform(smoothProgress, [0.40, 0.62], [0, 0.9]);
@@ -133,10 +132,9 @@ export const Mandir3DStage: React.FC = () => {
             <motion.div
               style={{ 
                 opacity: gardenOpacity, 
-                y: gardenY, 
                 scale: gardenScale 
               }}
-              className="relative w-[98%] sm:w-[96%] max-w-[800px] -mt-[5.4%] sm:-mt-[5.8%] md:-mt-[6.2%] z-20 flex justify-center pointer-events-none"
+              className="relative w-[98%] sm:w-[96%] max-w-[800px] -mt-[5.8%] sm:-mt-[6.2%] md:-mt-[6.6%] z-20 flex justify-center pointer-events-none"
             >
               {/* Garden Promenade & Grand Staircase Base */}
               <img 
