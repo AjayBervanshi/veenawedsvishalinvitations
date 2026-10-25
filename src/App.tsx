@@ -9,7 +9,7 @@ export const App: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#240b04] text-[#5f250f] overflow-x-hidden">
+    <div className="min-h-screen bg-[#fbf5eb] text-[#5f250f] overflow-x-hidden selection:bg-[#dda45d]/40">
       
       {/* 1. Opening Tactile Curtain / Envelope */}
       <OpeningCurtain
@@ -23,13 +23,13 @@ export const App: React.FC = () => {
       {/* 2. Floating Celebratory Petals */}
       <FloatingPetals />
 
-      {/* 3. Audio Dock */}
+      {/* 3. Audio Dock (Ring Bell & Mute/Unmute) */}
       <AudioDock />
 
       {/* 4. The Authentic Mandir Canvas */}
-      <div className="w-full flex justify-center bg-[#240b04] min-h-screen py-0 md:py-6">
+      <main className="w-full bg-[#fbf5eb] min-h-screen">
         <MandirFullCanvas />
-      </div>
+      </main>
 
     </div>
   );
