@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { weddingData, initialBlessings } from '../data/weddingData';
-import { soundManager } from '../utils/sound';
 import { 
   Navigation, 
   Calendar, 
-  Heart, 
   Send, 
   CheckCircle2, 
   MessageSquareShare, 
@@ -15,44 +13,40 @@ import {
   Sparkles,
   Sun,
   Flame,
-  Volume2
+  Heart
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { Mandir3DStage } from './Mandir3DStage';
+import { AnimatedJourneyVisual } from './AnimatedJourneyVisual';
 
 export const MandirFullCanvas: React.FC = () => {
   // Scrollytelling scroll tracking for Couple Names & Parallax Layers
   const { scrollY } = useScroll();
 
-  // Dynamic Scrollytelling Transitions:
-  // As user scrolls from 0 to 300px, the hero card gracefully dissolves and lifts into the heavens
-  const heroCardOpacity = useTransform(scrollY, [0, 260], [1, 0]);
-  const heroCardScale = useTransform(scrollY, [0, 260], [1, 0.94]);
-  const heroCardY = useTransform(scrollY, [0, 260], [0, -45]);
+  // Individual Scrollytelling Parallax for Hero Text Elements:
+  // Bride Name drifts gently
+  const brideX = useTransform(scrollY, [0, 600], [0, -25]);
+  const brideOpacity = useTransform(scrollY, [0, 600], [1, 0.9]);
 
-  // Sacred arch and bells drift upward
-  const archOpacity = useTransform(scrollY, [0, 220], [1, 0]);
-  const archY = useTransform(scrollY, [0, 220], [0, -30]);
+  // Groom Name drifts gently
+  const groomX = useTransform(scrollY, [0, 600], [0, 25]);
+  const groomOpacity = useTransform(scrollY, [0, 600], [1, 0.9]);
+
+  // Invocation & Host Message
+  const headerY = useTransform(scrollY, [0, 600], [0, -20]);
+  const headerOpacity = useTransform(scrollY, [0, 600], [1, 0.95]);
+
+  // Connective "weds"
+  const wedsScale = useTransform(scrollY, [0, 600], [1, 0.98]);
+  const wedsOpacity = useTransform(scrollY, [0, 600], [1, 0.95]);
+
+  // Muhurat Badge
+  const muhuratY = useTransform(scrollY, [0, 600], [0, -15]);
+  const muhuratOpacity = useTransform(scrollY, [0, 600], [1, 0.95]);
 
   // Background Sun & Clouds parallax
-  const sunY = useTransform(scrollY, [0, 500], [0, 25]);
-  const cloudsDrift = useTransform(scrollY, [0, 500], [0, 35]);
-
-  // Temple Crest Parallax: Ascends from below to meet the reader
-  const templeCrestY = useTransform(scrollY, [0, 450], [0, -30]);
-
-  // Bell chime & celebratory confetti
-  const [bellRinging, setBellRinging] = useState(false);
-  const ringBell = () => {
-    soundManager.playBellChime();
-    setBellRinging(true);
-    confetti({
-      particleCount: 55,
-      spread: 75,
-      origin: { y: 0.22 },
-      colors: ['#dda45d', '#e67e22', '#f39c12', '#e74c3c']
-    });
-    setTimeout(() => setBellRinging(false), 900);
-  };
+  const sunY = useTransform(scrollY, [0, 600], [0, 40]);
+  const cloudsDrift = useTransform(scrollY, [0, 600], [0, 50]);
 
   // Auspicious Countdown calculation
   const calculateTimeLeft = () => {
@@ -80,7 +74,7 @@ export const MandirFullCanvas: React.FC = () => {
     e.preventDefault();
     if (!bName.trim() || !bMsg.trim()) return;
     confetti({ 
-      particleCount: 70, 
+      particleCount: 75, 
       spread: 70, 
       origin: { y: 0.8 }, 
       colors: ['#dda45d', '#e67e22', '#e74c3c'] 
@@ -136,240 +130,177 @@ export const MandirFullCanvas: React.FC = () => {
     <div className="w-full bg-[#fbf5eb] text-[#5f250f] min-h-screen overflow-x-hidden selection:bg-[#dda45d]/40">
       
       {/* ============================================================== */}
-      {/* 1. BESPOKE ROYAL HERO SANCTUM (CUSTOM DESIGNED & ANIMATED)     */}
+      {/* 1. BESPOKE ROYAL HERO: NO BOX, BOLD TYPOGRAPHY, INDEPENDENT FX */}
       {/* ============================================================== */}
       <section 
-        className="relative w-full overflow-hidden pt-4 md:pt-6 pb-2 flex flex-col items-center justify-between min-h-[96vh] md:min-h-screen"
+        className="relative w-full overflow-hidden pt-6 md:pt-10 pb-4 flex flex-col items-center justify-between min-h-[96vh] md:min-h-screen"
         style={{
-          background: 'radial-gradient(ellipse at 50% 20%, rgba(254, 243, 199, 0.75) 0%, rgba(251, 245, 235, 0.95) 55%, #fbf5eb 100%)'
+          background: 'radial-gradient(ellipse at 50% 25%, rgba(254, 243, 199, 0.8) 0%, rgba(251, 245, 235, 0.95) 60%, #fbf5eb 100%)'
         }}
       >
         
-        {/* Ambient Subtle Sky Pattern */}
+        {/* Subtle Ambient Texture */}
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-25 mix-blend-multiply"
+          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-20 mix-blend-multiply"
           style={{ backgroundImage: 'url(/assets/mandir/sky-v1.webp)' }}
         />
 
         {/* Radiant Golden Surya with Gentle Pulsing Aura */}
         <motion.div 
           style={{ y: sunY }}
-          className="absolute top-4 md:top-8 left-1/2 -translate-x-1/2 z-0 pointer-events-none opacity-85"
+          className="absolute top-6 md:top-10 left-1/2 -translate-x-1/2 z-0 pointer-events-none opacity-85"
         >
           <img 
             src="/assets/mandir/sun-v1.webp" 
             alt="Surya" 
-            className="w-44 md:w-64 lg:w-80 h-auto drop-shadow-[0_0_80px_rgba(221,164,93,0.8)] animate-pulse"
+            className="w-52 md:w-72 lg:w-96 h-auto drop-shadow-[0_0_90px_rgba(221,164,93,0.85)] animate-pulse"
             style={{ animationDuration: '6s' }}
           />
         </motion.div>
 
-        {/* Ethereal Floating Clouds (Soft Blurred Drift, Zero Harsh Edges) */}
+        {/* Soft Drifting Clouds */}
         <motion.div 
           style={{ x: cloudsDrift }}
-          className="absolute top-12 md:top-20 w-full z-10 pointer-events-none opacity-45 animate-clouds"
+          className="absolute top-16 md:top-24 w-full z-10 pointer-events-none opacity-40 animate-clouds"
         >
           <img src="/assets/mandir/cloud-v1.webp" alt="Clouds" className="w-full object-cover filter blur-[0.5px]" />
         </motion.div>
 
         {/* ========================================================== */}
-        {/* SACRED ARCH, GANESHA INVOCATION & PENDULUM BELLS           */}
+        {/* SACRED INVOCATION: GANESHA & SANSKRIT SHLOKA               */}
         {/* ========================================================== */}
         <motion.div 
-          style={{ opacity: archOpacity, y: archY }}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-30 w-full max-w-2xl px-4 flex flex-col items-center"
-        >
-          {/* Traditional Royal Toran / Garland Arch in Pure SVG */}
-          <div className="w-full max-w-md mx-auto mb-1 flex justify-center">
-            <svg viewBox="0 0 400 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto drop-shadow-sm opacity-90">
-              <path d="M10 5 Q 100 32 200 8 Q 300 32 390 5" stroke="#dda45d" strokeWidth="2.5" fill="none" />
-              <path d="M10 8 Q 100 35 200 11 Q 300 35 390 8" stroke="#ab5626" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-              {/* Marigold Swags */}
-              {[40, 90, 140, 190, 240, 290, 340].map((cx, idx) => (
-                <circle key={idx} cx={cx} cy={idx % 2 === 0 ? 18 : 22} r="5" fill="#f39c12" stroke="#d35400" strokeWidth="1" />
-              ))}
-              <circle cx="200" cy="10" r="7" fill="#dda45d" stroke="#5f250f" strokeWidth="1.5" />
-            </svg>
-          </div>
-          
-          {/* Symmetrical Hanging Brass Bells & Sacred Ganesha Inscription */}
-          <div className="w-full max-w-lg flex justify-between items-center px-4 sm:px-8">
-            
-            {/* Left Hanging Temple Bell */}
-            <button 
-              type="button" 
-              onClick={ringBell} 
-              title="Tap to ring temple bell" 
-              className="cursor-pointer focus:outline-none transition-transform hover:scale-120 active:scale-95 group flex flex-col items-center"
-            >
-              <img 
-                src="/assets/mandir/bell-cup-a.png" 
-                alt="Temple Bell" 
-                className={`w-9 md:w-12 h-auto animate-swing-left drop-shadow-md transition-transform ${bellRinging ? 'scale-125' : ''}`} 
-              />
-              <span className="sr-only">Ring Bell</span>
-            </button>
-            
-            {/* Center: Lord Ganesha & Sacred Vedic Shloka */}
-            <div className="flex flex-col items-center text-center px-2">
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-                className="relative"
-              >
-                <img 
-                  src="/assets/mandir/ganpati-icon-v1.webp" 
-                  alt="Lord Ganesha" 
-                  className="w-11 h-11 md:w-14 md:h-14 object-contain drop-shadow-md filter brightness-105" 
-                />
-              </motion.div>
-              
-              <span className="text-[#5f250f] text-xs md:text-sm font-serif font-bold tracking-[0.2em] mt-0.5 drop-shadow-sm">
-                || श्री गणेशाय नमः ||
-              </span>
-              
-              <p className="text-[10px] md:text-[11px] text-[#ab5626] font-serif font-semibold italic mt-0.5 max-w-xs md:max-w-sm tracking-wide leading-tight">
-                वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
-              </p>
-              
-              <div className="flex items-center justify-center gap-2 mt-1 opacity-70">
-                <span className="w-12 h-px bg-[#dda45d]" />
-                <span className="text-[#dda45d] text-[10px]">✦</span>
-                <span className="w-12 h-px bg-[#dda45d]" />
-              </div>
-            </div>
-
-            {/* Right Hanging Temple Bell */}
-            <button 
-              type="button" 
-              onClick={ringBell} 
-              title="Tap to ring temple bell" 
-              className="cursor-pointer focus:outline-none transition-transform hover:scale-120 active:scale-95 group flex flex-col items-center"
-            >
-              <img 
-                src="/assets/mandir/bell-cup-b.png" 
-                alt="Temple Bell" 
-                className={`w-9 md:w-12 h-auto animate-swing-right drop-shadow-md transition-transform ${bellRinging ? 'scale-125' : ''}`} 
-              />
-              <span className="sr-only">Ring Bell</span>
-            </button>
-          </div>
-        </motion.div>
-
-        {/* ========================================================== */}
-        {/* COUPLE GRAND REVEAL CARD WITH SCROLLYTELLING TRANSITIONS   */}
-        {/* ========================================================== */}
-        <motion.div
-          style={{ opacity: heroCardOpacity, scale: heroCardScale, y: heroCardY }}
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          style={{ opacity: headerOpacity, y: headerY }}
+          initial={{ opacity: 0, y: -30, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-30 w-11/12 max-w-lg md:max-w-xl mx-auto my-2 md:my-3 text-center px-6 sm:px-10 md:px-12 py-5 md:py-6 rounded-3xl bg-white/95 border-2 border-[#dda45d] shadow-[0_20px_50px_rgba(95,37,15,0.13)] backdrop-blur-md"
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-30 w-full max-w-2xl px-4 flex flex-col items-center text-center"
         >
-          {/* Top Decorative Peacock Ornament */}
-          <div className="flex justify-center -mt-10 md:-mt-11 mb-1">
-            <div className="p-1.5 rounded-full bg-[#fbf5eb] border border-[#dda45d] shadow-sm">
-              <img src="/assets/mandir/peacock-ornament-v1.webp" alt="" className="w-10 md:w-13 h-auto drop-shadow" />
-            </div>
+          {/* Majestic Antique Gold Ganesha Icon with Welcoming Entrance Animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.65, y: -25 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex items-center justify-center my-3 group"
+          >
+            {/* Radiant Golden Halo Glow */}
+            <div className="absolute inset-0 -m-4 rounded-full bg-radial from-[#dda45d]/40 via-[#dda45d]/12 to-transparent blur-2xl pointer-events-none animate-pulse" />
+            
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative z-10"
+            >
+              <img 
+                src="/assets/mandir/ganpati-icon-v1.webp" 
+                alt="Lord Ganesha" 
+                className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 object-contain drop-shadow-[0_10px_25px_rgba(221,164,93,0.5)] filter brightness-110 hover:scale-105 transition-transform duration-300" 
+              />
+            </motion.div>
+          </motion.div>
+          
+          {/* Sacred Mantra in Rozha One Devanagari */}
+          <h2 className="font-shloka text-base md:text-xl font-bold tracking-[0.25em] text-[#5f250f] drop-shadow-sm mt-1">
+            || श्री गणेशाय नमः ||
+          </h2>
+          
+          {/* Classical Sanskrit Shloka */}
+          <p className="font-shloka text-xs md:text-sm text-[#ab5626] font-medium tracking-wide mt-1 max-w-md leading-relaxed">
+            वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+          </p>
+
+          <div className="flex items-center justify-center gap-2 my-2 opacity-60">
+            <span className="w-16 h-px bg-[#dda45d]" />
+            <span className="text-[#dda45d] text-xs">❖</span>
+            <span className="w-16 h-px bg-[#dda45d]" />
           </div>
 
-          {/* Invitation Host Salutation */}
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.28em] text-[#ab5626] font-serif font-bold mb-1">
+          {/* Salutation Message in Literary Serif (Marcellus) */}
+          <p className="font-digits text-[11px] md:text-xs uppercase tracking-[0.3em] text-[#ab5626] font-bold mb-1">
             With Joy & Deep Gratitude
           </p>
-          <p className="text-xs md:text-sm text-[#5f250f]/85 font-serif leading-relaxed mb-2.5 max-w-md mx-auto">
+          <p className="font-body text-xs md:text-sm text-[#5f250f]/85 max-w-lg mx-auto leading-relaxed">
             {weddingData.hostMessage}
           </p>
+        </motion.div>
 
-          {/* Calligraphy Bride & Groom Names with Animated Entrance & Hover Glow */}
-          <div className="my-1">
-            
-            {/* Bride's Name */}
-            <motion.h1 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.35 }}
-              className="text-5xl sm:text-6xl md:text-7xl text-[#5f250f] tracking-wide transition-colors duration-300 hover:text-[#ab5626]" 
-              style={{ fontFamily: 'var(--mandir-script)' }}
-            >
+        {/* ========================================================== */}
+        {/* COUPLE NAMES STAGE: NO BOX, BOLD MAJESTIC TYPOGRAPHY       */}
+        {/* ========================================================== */}
+        <div className="relative z-30 w-full max-w-4xl mx-auto my-3 md:my-5 px-4 text-center">
+          
+          {/* BRIDE'S NAME: Slides in from Left, Dissolves to Left on Scroll */}
+          <motion.div
+            style={{ x: brideX, opacity: brideOpacity }}
+            initial={{ opacity: 0, x: -80, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="my-1"
+          >
+            <h1 className="font-regal font-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#5f250f] tracking-tight leading-none drop-shadow-[0_4px_16px_rgba(95,37,15,0.18)] hover:text-[#ab5626] transition-colors duration-300">
               {weddingData.brideName}
-            </motion.h1>
-            
-            <p className="text-xs md:text-sm text-[#5f250f]/75 font-serif italic -mt-1 mb-1">
+            </h1>
+            <p className="font-body text-xs sm:text-sm md:text-base text-[#5f250f]/75 italic mt-1">
               Daughter of {weddingData.brideParents}
             </p>
+          </motion.div>
 
-            {/* Sacred Connective Script */}
-            <div className="flex items-center justify-center gap-3 my-0.5">
-              <span className="w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-[#dda45d] to-transparent" />
-              <span className="text-2xl md:text-3xl text-[#dda45d] font-bold" style={{ fontFamily: 'var(--mandir-script)' }}>
-                weds
-              </span>
-              <span className="w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-[#dda45d] to-transparent" />
-            </div>
+          {/* SACRED CONNECTIVE "weds": Blooms and Spins In */}
+          <motion.div
+            style={{ scale: wedsScale, opacity: wedsOpacity }}
+            initial={{ opacity: 0, scale: 0, rotate: -90 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 1.0, delay: 0.55, type: 'spring', bounce: 0.3 }}
+            className="flex items-center justify-center gap-3 my-2"
+          >
+            <span className="w-16 sm:w-28 md:w-36 h-px bg-gradient-to-r from-transparent via-[#dda45d] to-transparent" />
+            <span className="font-script text-3xl sm:text-4xl md:text-5xl text-[#dda45d] font-bold px-2 drop-shadow-sm">
+              weds
+            </span>
+            <span className="w-16 sm:w-28 md:w-36 h-px bg-gradient-to-r from-transparent via-[#dda45d] to-transparent" />
+          </motion.div>
 
-            {/* Groom's Name */}
-            <motion.h1 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.55 }}
-              className="text-5xl sm:text-6xl md:text-7xl text-[#5f250f] tracking-wide transition-colors duration-300 hover:text-[#ab5626]" 
-              style={{ fontFamily: 'var(--mandir-script)' }}
-            >
+          {/* GROOM'S NAME: Slides in from Right, Dissolves to Right on Scroll */}
+          <motion.div
+            style={{ x: groomX, opacity: groomOpacity }}
+            initial={{ opacity: 0, x: 80, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1.1, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="my-1"
+          >
+            <h1 className="font-regal font-black text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#5f250f] tracking-tight leading-none drop-shadow-[0_4px_16px_rgba(95,37,15,0.18)] hover:text-[#ab5626] transition-colors duration-300">
               {weddingData.groomName}
-            </motion.h1>
-
-            <p className="text-xs md:text-sm text-[#5f250f]/75 font-serif italic -mt-1 mb-2">
+            </h1>
+            <p className="font-body text-xs sm:text-sm md:text-base text-[#5f250f]/75 italic mt-1">
               Son of {weddingData.groomParents}
             </p>
-          </div>
+          </motion.div>
 
-          {/* Auspicious Muhurat Pill */}
-          <div className="inline-flex flex-col sm:flex-row items-center gap-1.5 px-6 py-2 rounded-full bg-[#5f250f] text-[#dda45d] text-xs md:text-sm font-serif font-bold tracking-wider shadow-md mt-1">
-            <span>{weddingData.weddingDateDisplay}</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="text-[#fff0d4]">शुभ मुहूर्त (सात फेरे)</span>
-          </div>
+          {/* AUSPICIOUS MUHURAT BADGE: Golden Pill with Radiant Pulse */}
+          <motion.div
+            style={{ y: muhuratY, opacity: muhuratOpacity }}
+            initial={{ opacity: 0, scale: 0.85, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 1.0, ease: 'easeOut' }}
+            className="mt-5 flex flex-col items-center"
+          >
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 px-7 py-2.5 rounded-full bg-[#5f250f] text-[#dda45d] text-xs sm:text-sm font-digits font-bold tracking-widest border-2 border-[#dda45d] shadow-[0_10px_25px_rgba(95,37,15,0.2)] animate-gold-glow">
+              <span>{weddingData.weddingDateDisplay}</span>
+              <span className="hidden sm:inline text-[#dda45d]">•</span>
+              <span className="text-[#fff0d4] font-shloka font-bold">शुभ मुहूर्त (सात फेरे)</span>
+            </div>
 
-          <p className="text-[11px] md:text-xs text-[#ab5626] font-serif font-semibold mt-1.5">
-            Hotel Adarsh Vatika • Ballia, Uttar Pradesh
-          </p>
+            <p className="font-body text-xs sm:text-sm text-[#ab5626] font-bold tracking-wider mt-2">
+              Hotel Adarsh Vatika • Ballia, Uttar Pradesh
+            </p>
+          </motion.div>
 
-          {/* Fluttering Saffron Temple Flag */}
-          <div className="absolute -top-6 md:-top-7 -right-2 md:-right-3 flex items-start pointer-events-none">
-            <img src="/assets/mandir/flag-pole-v1.webp" alt="" className="w-3 md:w-4 h-18 md:h-20 object-contain" />
-            <img src="/assets/mandir/flag-cloth-v1.png" alt="" className="w-10 md:w-12 h-auto -ml-1 -mt-1 animate-flag" />
-          </div>
+        </div>
 
-          {/* Subtle Bell Chime Hint Button */}
-          <div className="mt-2.5 pt-2 border-t border-[#dda45d]/20 flex items-center justify-center gap-1.5 text-[11px] text-[#5f250f]/60 font-serif italic">
-            <Volume2 className="w-3.5 h-3.5 text-[#dda45d]" />
-            <span>Tap temple bells to receive divine blessings</span>
-          </div>
-        </motion.div>
-
-        {/* ========================================================== */}
-        {/* PARALLAX MANDIR CREST (TRANSITIONS INTO THE ITINERARY)     */}
-        {/* ========================================================== */}
-        <motion.div 
-          style={{ y: templeCrestY }}
-          className="relative z-20 w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto -mt-2 md:-mt-5 pointer-events-none"
-        >
-          <img 
-            src="/assets/mandir/temple-crest.webp" 
-            alt="Sacred Mandir" 
-            className="w-full h-auto drop-shadow-[0_-15px_30px_rgba(95,37,15,0.18)]" 
-          />
-        </motion.div>
-
-        {/* Gentle Scroll Indicator */}
-        <div className="relative z-30 pb-2 flex flex-col items-center text-[#5f250f] font-serif">
-          <span className="text-[10px] md:text-xs uppercase tracking-widest font-semibold mb-0.5">
-            Scroll to Explore Multiday Celebrations
+        {/* Scroll Indicator */}
+        <div className="relative z-30 pb-2 flex flex-col items-center text-[#5f250f]">
+          <span className="font-digits text-[10px] sm:text-xs uppercase tracking-widest font-semibold mb-0.5">
+            Scroll to Enter the Sacred Mandir
           </span>
           <ChevronDown className="w-4 h-4 md:w-5 md:h-5 animate-bounce text-[#ab5626]" />
         </div>
@@ -377,9 +308,14 @@ export const MandirFullCanvas: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 2. MULTIDAY CEREMONIES TIMELINE: SHARP ROYAL ARCH CSS CARDS     */}
+      {/* 2. SHUBH VIVAH: LAYERED SCROLL TRANSITION SEQUENCE             */}
       {/* ============================================================== */}
-      <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-[#fbf5eb]">
+      <Mandir3DStage />
+
+      {/* ============================================================== */}
+      {/* 3. FUNCTIONS: ELEGANT CEREMONIES & CELEBRATIONS                */}
+      {/* ============================================================== */}
+      <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-[#fdfaf4] border-t border-[#dda45d]/20">
         
         {/* Decorative Peacock Pattern */}
         <div 
@@ -387,27 +323,18 @@ export const MandirFullCanvas: React.FC = () => {
           style={{ backgroundImage: 'url(/assets/mandir/peacock-backdrop-v1.webp)' }} 
         />
 
-        {/* Decorative Pillars on Large Screens */}
-        <div className="hidden lg:block absolute top-0 bottom-0 left-4 w-12 opacity-30 pointer-events-none">
-          <img src="/assets/mandir/pillar-left-v1.webp" alt="" className="w-full h-full object-repeat-y" />
-        </div>
-        <div className="hidden lg:block absolute top-0 bottom-0 right-4 w-12 opacity-30 pointer-events-none">
-          <img src="/assets/mandir/pillar-right-v1.webp" alt="" className="w-full h-full object-repeat-y" />
-        </div>
-
         <div className="relative z-10 max-w-5xl mx-auto">
           
-          {/* Section Heading */}
+          {/* Section Heading: Personal & Elegant Functions */}
           <div className="text-center mb-10">
-            <img src="/assets/mandir/peacock-ornament-v1.webp" alt="" className="w-13 h-auto mx-auto mb-2" />
-            <p className="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-serif font-bold mb-1">
-              मंगलोत्सव • Multiday Celebrations
+            <p className="font-shloka text-xs md:text-sm uppercase tracking-[0.25em] text-[#ab5626] font-bold mb-1">
+              शुभ उत्सव • Auspicious Celebrations
             </p>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#5f250f] tracking-wide">
-              Wedding Itinerary
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-[#5f250f] tracking-wide">
+              Functions
             </h2>
-            <p className="text-xs md:text-sm font-serif text-[#ab5626] font-semibold mt-1">
-              Join Us for 3 Days of Sacred Joy & Celebration in Ballia
+            <p className="font-body text-xs md:text-sm text-[#ab5626] font-semibold mt-1">
+              We warmly invite you to share in these joyous occasions at Hotel Adarsh Vatika, Ballia
             </p>
             <img src="/assets/mandir/ornament-band-v1.webp" alt="" className="w-44 h-auto mx-auto mt-2 opacity-75" />
           </div>
@@ -431,20 +358,20 @@ export const MandirFullCanvas: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Hindi Devanagari Badge */}
+                  {/* Hindi Devanagari Badge in Rozha One */}
                   {event.hindiTitle && (
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#dda45d]/15 text-[#ab5626] text-xs font-serif font-bold mb-2">
+                    <span className="font-shloka inline-block px-3 py-1 rounded-full bg-[#dda45d]/15 text-[#ab5626] text-xs font-bold mb-2">
                       {event.hindiTitle}
                     </span>
                   )}
 
-                  {/* English Ceremony Title */}
-                  <h3 className="text-2xl font-serif font-bold text-[#5f250f] mb-1">
+                  {/* English Ceremony Title in Rozha One / Cinzel */}
+                  <h3 className="font-shloka text-2xl font-bold text-[#5f250f] mb-1">
                     {event.title}
                   </h3>
 
-                  {/* Date & Time Pills */}
-                  <div className="flex flex-col gap-1 text-xs font-serif text-[#ab5626] font-semibold my-2.5">
+                  {/* Date & Time in Cinzel Digits */}
+                  <div className="flex flex-col gap-1 text-xs font-digits text-[#ab5626] font-semibold my-2.5">
                     <span className="flex items-center justify-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-[#dda45d]" /> {event.date}
                     </span>
@@ -454,13 +381,13 @@ export const MandirFullCanvas: React.FC = () => {
                   </div>
 
                   {/* Venue Location */}
-                  <p className="text-xs font-serif text-[#5f250f]/80 flex items-center justify-center gap-1 my-2">
+                  <p className="font-body text-xs text-[#5f250f]/80 flex items-center justify-center gap-1 my-2">
                     <MapPin className="w-3.5 h-3.5 text-[#dda45d] shrink-0" />
                     <span>{event.venue}</span>
                   </p>
 
-                  {/* Description */}
-                  <p className="text-xs text-[#5f250f]/75 font-serif leading-relaxed my-3 px-1">
+                  {/* Description in Marcellus */}
+                  <p className="font-body text-xs text-[#5f250f]/75 leading-relaxed my-3 px-1">
                     {event.description}
                   </p>
                 </div>
@@ -468,7 +395,7 @@ export const MandirFullCanvas: React.FC = () => {
                 <div>
                   {/* Attire / Dress Code Badge */}
                   {event.dressCode && (
-                    <div className="inline-block px-3 py-1 rounded-lg bg-[#fbf5eb] border border-[#dda45d]/30 text-[11px] text-[#5f250f] font-serif mb-4">
+                    <div className="inline-block px-3 py-1 rounded-lg bg-[#fbf5eb] border border-[#dda45d]/30 text-[11px] text-[#5f250f] font-body mb-4">
                       <strong className="text-[#ab5626]">Attire:</strong> {event.dressCode}
                     </div>
                   )}
@@ -479,7 +406,7 @@ export const MandirFullCanvas: React.FC = () => {
                       href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title + ' - ' + weddingData.brideName + ' & ' + weddingData.groomName)}&location=${encodeURIComponent(event.venue)}&details=${encodeURIComponent(event.description)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#dda45d] bg-[#fbf5eb] text-xs font-serif uppercase tracking-wider text-[#5f250f] font-bold shadow-sm hover:bg-[#dda45d] hover:text-[#5f250f] transition-all"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#dda45d] bg-[#fbf5eb] font-digits text-xs uppercase tracking-wider text-[#5f250f] font-bold shadow-sm hover:bg-[#dda45d] hover:text-[#5f250f] transition-all"
                     >
                       <Calendar className="w-3.5 h-3.5 text-[#ab5626]" />
                       <span>Add to Calendar</span>
@@ -494,16 +421,16 @@ export const MandirFullCanvas: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 3. COUPLE STORY & PORTRAIT: RESPONSIVE TWO-COLUMN LAYOUT       */}
+      {/* 4. OUR JOURNEY OF LOVE: ANIMATED VISUAL (NO STATIC PHOTO)      */}
       {/* ============================================================== */}
-      <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-[#fdfaf4] border-t border-[#dda45d]/20">
+      <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-[#fbf5eb] border-t border-[#dda45d]/20">
         <div className="max-w-4xl mx-auto">
           
           <div className="text-center mb-8">
-            <p className="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-serif font-bold mb-1">
+            <p className="font-digits text-[11px] md:text-xs uppercase tracking-[0.3em] text-[#ab5626] font-bold mb-1">
               Two Hearts, One Soul
             </p>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#5f250f]">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#5f250f]">
               Our Journey of Love
             </h2>
             <img src="/assets/mandir/countdown-divider-v1.webp" alt="" className="w-36 h-auto mx-auto mt-2 opacity-75" />
@@ -511,33 +438,20 @@ export const MandirFullCanvas: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             
-            {/* Left: Couple Photo Medallion */}
+            {/* Left: Custom Animated Medallion Visual */}
             <div className="flex flex-col items-center">
-              <div className="relative w-48 h-48 md:w-60 md:h-60 rounded-full border-4 border-[#dda45d] p-1.5 shadow-xl bg-white">
-                <img 
-                  src="/assets/mandir/couple-photo-v1.webp" 
-                  alt="Veena Singh and Vishal Singh" 
-                  className="w-full h-full object-cover rounded-full" 
-                />
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-2.5 rounded-full bg-[#5f250f] border-2 border-[#dda45d] text-[#dda45d] shadow">
-                  <Heart className="w-4 h-4 fill-current" />
-                </div>
-              </div>
-              <p className="text-sm uppercase tracking-widest text-[#ab5626] font-serif font-bold mt-5">
-                Veena Singh & Vishal Singh
-              </p>
-              <span className="text-xs text-[#5f250f]/70 font-serif italic">#VeenaWedsVishal</span>
+              <AnimatedJourneyVisual />
             </div>
 
             {/* Right: Narrative Card in CSS */}
             <div className="royal-mandir-card royal-border p-6 md:p-8 text-left">
-              <h4 className="text-lg md:text-xl font-serif font-bold text-[#5f250f] mb-3">
+              <h4 className="font-display text-lg md:text-xl font-bold text-[#5f250f] mb-3">
                 A Vow of Togetherness
               </h4>
-              <p className="text-xs md:text-sm font-serif leading-relaxed text-[#5f250f]/85 italic mb-4">
+              <p className="font-body text-xs md:text-sm leading-relaxed text-[#5f250f]/85 italic mb-4">
                 "Our hearts are full and our smiles wide! We are ready to make memories that last a lifetime, and our celebrations will be truly blessed by your presence in Ballia. Come join the Haldi, Mehndi, and Barat, and dance with us as we tie the sacred knot!"
               </p>
-              <p className="text-xs font-serif font-bold text-[#ab5626] text-right">
+              <p className="font-script text-lg text-[#ab5626] text-right font-bold">
                 — With Warmest Love, Veena & Vishal
               </p>
             </div>
@@ -548,17 +462,17 @@ export const MandirFullCanvas: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 4. COUNTDOWN, VENUE & GUEST CONCIERGE (ADAPTIVE GRID)          */}
+      {/* 5. COUNTDOWN, VENUE & GUEST CONCIERGE (ADAPTIVE GRID)          */}
       {/* ============================================================== */}
-      <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-[#fbf5eb] border-t border-[#dda45d]/20">
+      <section className="relative w-full py-12 md:py-16 px-4 md:px-8 bg-[#fdfaf4] border-t border-[#dda45d]/20">
         <div className="max-w-4xl mx-auto">
           
           {/* Live Auspicious Countdown Ticker to 30 Nov 2026 */}
           <div className="text-center mb-12">
-            <p className="text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-serif font-bold mb-1">
+            <p className="font-digits text-[11px] md:text-xs uppercase tracking-[0.25em] text-[#ab5626] font-bold mb-1">
               The Auspicious Countdown
             </p>
-            <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#5f250f] mb-2">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-[#5f250f] mb-2">
               Until the Sacred Phere Begins
             </h3>
             <img src="/assets/mandir/countdown-divider-v1.webp" alt="" className="w-44 h-auto mx-auto mb-6 opacity-75" />
@@ -571,10 +485,10 @@ export const MandirFullCanvas: React.FC = () => {
                 { label: 'SECONDS', val: timeLeft.seconds }
               ].map((item, i) => (
                 <div key={i} className="p-3 md:p-4 rounded-2xl bg-white border border-[#dda45d] shadow-sm">
-                  <span className="block text-2xl md:text-3xl font-serif font-bold text-[#5f250f]">
+                  <span className="block font-digits text-2xl md:text-3xl font-bold text-[#5f250f]">
                     {String(item.val).padStart(2, '0')}
                   </span>
-                  <span className="text-[10px] md:text-xs font-serif font-bold text-[#ab5626]">
+                  <span className="font-digits text-[10px] md:text-xs font-bold text-[#ab5626]">
                     {item.label}
                   </span>
                 </div>
@@ -587,10 +501,10 @@ export const MandirFullCanvas: React.FC = () => {
             
             {/* Left: Venue & Concierge */}
             <div className="royal-mandir-card royal-border p-6 md:p-8 text-center">
-              <h3 className="text-xl md:text-2xl font-serif font-bold text-[#5f250f] mb-1">
+              <h3 className="font-display text-xl md:text-2xl font-bold text-[#5f250f] mb-1">
                 {weddingData.venueName}
               </h3>
-              <p className="text-xs md:text-sm font-serif text-[#5f250f]/80 mb-5">
+              <p className="font-body text-xs md:text-sm text-[#5f250f]/80 mb-5">
                 {weddingData.venueAddress}
               </p>
               
@@ -598,7 +512,7 @@ export const MandirFullCanvas: React.FC = () => {
                 href={weddingData.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#5f250f] text-[#dda45d] font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all mb-6"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#5f250f] text-[#dda45d] font-digits font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all mb-6"
               >
                 <Navigation className="w-4 h-4 fill-current" />
                 <span>Open in Google Maps</span>
@@ -608,35 +522,35 @@ export const MandirFullCanvas: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#dda45d]/30 text-center">
                 <div className="p-3 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/30">
                   <img src="/assets/mandir/icon-parking-v1.webp" alt="" className="w-6 h-6 mx-auto mb-1" />
-                  <span className="text-xs font-serif font-bold text-[#5f250f] block">Parking</span>
-                  <span className="text-[10px] text-[#5f250f]/70 font-serif">Available at Venue</span>
+                  <span className="font-display text-xs font-bold text-[#5f250f] block">Parking</span>
+                  <span className="font-body text-[10px] text-[#5f250f]/70">Available at Venue</span>
                 </div>
                 <div className="p-3 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/30">
                   <img src="/assets/mandir/icon-weather-v1.webp" alt="" className="w-6 h-6 mx-auto mb-1" />
-                  <span className="text-xs font-serif font-bold text-[#5f250f] block">Ballia Weather</span>
-                  <span className="text-[10px] text-[#5f250f]/70 font-serif">Pleasant (18°C - 23°C)</span>
+                  <span className="font-display text-xs font-bold text-[#5f250f] block">Ballia Weather</span>
+                  <span className="font-body text-[10px] text-[#5f250f]/70">Pleasant (18°C - 23°C)</span>
                 </div>
               </div>
             </div>
 
             {/* Right: WhatsApp RSVP */}
             <div className="royal-mandir-card royal-border p-6 md:p-8 text-left">
-              <h3 className="text-lg md:text-xl font-serif font-bold text-[#5f250f] mb-1 text-center">
+              <h3 className="font-display text-lg md:text-xl font-bold text-[#5f250f] mb-1 text-center">
                 RSVP via WhatsApp
               </h3>
-              <p className="text-xs font-serif text-[#5f250f]/70 text-center mb-4">
+              <p className="font-body text-xs text-[#5f250f]/70 text-center mb-4">
                 Kindly respond by 20th November 2026
               </p>
 
               {rsvpSubmitted ? (
                 <div className="text-center py-4">
                   <CheckCircle2 className="w-12 h-12 text-[#dda45d] mx-auto mb-2" />
-                  <p className="text-sm font-serif font-bold text-[#5f250f]">Thank you, {rsvpName}!</p>
-                  <p className="text-xs text-[#5f250f]/80 mt-1 mb-4">Your RSVP is saved.</p>
+                  <p className="font-display text-sm font-bold text-[#5f250f]">Thank you, {rsvpName}!</p>
+                  <p className="font-body text-xs text-[#5f250f]/80 mt-1 mb-4">Your RSVP is saved.</p>
                   <button
                     type="button"
                     onClick={handleWhatsAppRsvp}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider shadow hover:scale-105 active:scale-95 transition-transform"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] text-white font-digits text-xs font-bold uppercase tracking-wider shadow hover:scale-105 active:scale-95 transition-transform"
                   >
                     <MessageSquareShare className="w-4 h-4" />
                     <span>Confirm on WhatsApp</span>
@@ -650,20 +564,20 @@ export const MandirFullCanvas: React.FC = () => {
                     placeholder="Your Full Name"
                     value={rsvpName}
                     onChange={(e) => setRsvpName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-xs font-serif text-[#5f250f] focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 font-body text-xs text-[#5f250f] focus:outline-none"
                   />
                   <input
                     type="tel"
                     placeholder="WhatsApp Number"
                     value={rsvpPhone}
                     onChange={(e) => setRsvpPhone(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-xs font-serif text-[#5f250f] focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 font-body text-xs text-[#5f250f] focus:outline-none"
                   />
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => setRsvpAttending('attending')}
-                      className={`py-2 rounded-xl text-xs font-serif font-bold uppercase ${
+                      className={`py-2 rounded-xl font-digits text-xs font-bold uppercase ${
                         rsvpAttending === 'attending' ? 'bg-[#5f250f] text-[#dda45d]' : 'bg-[#fbf5eb] text-[#5f250f]/70'
                       }`}
                     >
@@ -672,7 +586,7 @@ export const MandirFullCanvas: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setRsvpAttending('declined')}
-                      className={`py-2 rounded-xl text-xs font-serif font-bold uppercase ${
+                      className={`py-2 rounded-xl font-digits text-xs font-bold uppercase ${
                         rsvpAttending === 'declined' ? 'bg-[#8b1d24] text-white' : 'bg-[#fbf5eb] text-[#5f250f]/70'
                       }`}
                     >
@@ -683,7 +597,7 @@ export const MandirFullCanvas: React.FC = () => {
                     <select
                       value={rsvpGuests}
                       onChange={(e) => setRsvpGuests(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-xs font-serif text-[#5f250f] focus:outline-none"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 font-body text-xs text-[#5f250f] focus:outline-none"
                     >
                       <option value="1">1 Guest (Just me)</option>
                       <option value="2">2 Guests (Couple)</option>
@@ -692,7 +606,7 @@ export const MandirFullCanvas: React.FC = () => {
                   )}
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-full bg-[#5f250f] text-[#dda45d] text-xs font-serif font-bold uppercase tracking-widest shadow-md hover:scale-[1.01] transition-transform"
+                    className="w-full py-3 rounded-full bg-[#5f250f] text-[#dda45d] font-digits text-xs font-bold uppercase tracking-widest shadow-md hover:scale-[1.01] transition-transform"
                   >
                     Submit RSVP
                   </button>
@@ -704,10 +618,10 @@ export const MandirFullCanvas: React.FC = () => {
 
           {/* Blessing Wall */}
           <div className="mt-8 royal-mandir-card royal-border p-6 md:p-8 text-left">
-            <h3 className="text-xl font-serif font-bold text-[#5f250f] mb-1 text-center">
+            <h3 className="font-display text-xl font-bold text-[#5f250f] mb-1 text-center">
               Sacred Blessing Wall
             </h3>
-            <p className="text-xs font-serif text-[#5f250f]/70 text-center mb-5">
+            <p className="font-body text-xs text-[#5f250f]/70 text-center mb-5">
               Leave your auspicious prayers & heartfelt wishes for Veena & Vishal
             </p>
 
@@ -718,7 +632,7 @@ export const MandirFullCanvas: React.FC = () => {
                 placeholder="Your Name"
                 value={bName}
                 onChange={(e) => setBName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-xs font-serif text-[#5f250f] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 font-body text-xs text-[#5f250f] focus:outline-none"
               />
               <textarea
                 rows={2}
@@ -726,13 +640,13 @@ export const MandirFullCanvas: React.FC = () => {
                 placeholder="Your Sacred Blessing or Message..."
                 value={bMsg}
                 onChange={(e) => setBMsg(e.target.value)}
-                className="w-full px-4 py-2 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 text-xs font-serif text-[#5f250f] focus:outline-none resize-none"
+                className="w-full px-4 py-2 rounded-xl bg-[#fbf5eb] border border-[#dda45d]/50 font-body text-xs text-[#5f250f] focus:outline-none resize-none"
               />
               <div className="flex justify-between items-center">
-                {bSent && <span className="text-xs text-[#ab5626] font-serif font-bold">Blessing posted with joy!</span>}
+                {bSent && <span className="font-body text-xs text-[#ab5626] font-bold">Blessing posted with joy!</span>}
                 <button
                   type="submit"
-                  className="ml-auto inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#5f250f] text-[#dda45d] text-xs font-serif font-bold uppercase tracking-wider hover:scale-105 active:scale-95 transition-transform"
+                  className="ml-auto inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#5f250f] text-[#dda45d] font-digits text-xs font-bold uppercase tracking-wider hover:scale-105 active:scale-95 transition-transform"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Post Blessing</span>
@@ -744,10 +658,10 @@ export const MandirFullCanvas: React.FC = () => {
               {blessings.map((b) => (
                 <div key={b.id} className="p-3.5 rounded-2xl bg-[#fbf5eb] border border-[#dda45d]/30 text-left">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-xs font-serif font-bold text-[#5f250f]">{b.name}</span>
-                    <span className="text-[10px] text-[#5f250f]/50 font-serif">{b.timestamp}</span>
+                    <span className="font-display text-xs font-bold text-[#5f250f]">{b.name}</span>
+                    <span className="font-digits text-[10px] text-[#5f250f]/50">{b.timestamp}</span>
                   </div>
-                  <p className="text-xs font-serif italic text-[#5f250f]/80">"{b.message}"</p>
+                  <p className="font-body text-xs italic text-[#5f250f]/80">"{b.message}"</p>
                 </div>
               ))}
             </div>
@@ -757,14 +671,14 @@ export const MandirFullCanvas: React.FC = () => {
       </section>
 
       {/* ============================================================== */}
-      {/* 5. ROYAL MANDIR FOOTER                                         */}
+      {/* 6. ROYAL MANDIR FOOTER                                         */}
       {/* ============================================================== */}
       <footer className="py-8 text-center bg-[#5f250f] text-white border-t-2 border-[#dda45d]">
         <img src="/assets/mandir/ganpati-icon-v1.webp" alt="Lord Ganesha" className="w-10 h-10 mx-auto mb-2 filter brightness-150" />
-        <p className="text-xs font-serif text-[#dda45d] tracking-widest font-bold">
+        <p className="font-shloka text-xs text-[#dda45d] tracking-widest font-bold">
           || ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ||
         </p>
-        <p className="text-[11px] text-white/70 font-serif mt-1">
+        <p className="font-body text-[11px] text-white/70 mt-1">
           Veena Singh & Vishal Singh Wedding • Hotel Adarsh Vatika, Ballia • {weddingData.hashtag}
         </p>
       </footer>

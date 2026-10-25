@@ -15,7 +15,9 @@
     --m-gold-dark: #b87a32;
     --m-parchment: #fbf5eb;
     --m-cream: #fdfaf4;
-    --mandir-display: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+    --mandir-display: 'Cinzel Decorative', Georgia, serif;
+    --mandir-regal: 'Playfair Display', Georgia, serif;
+    --mandir-shloka: 'Rozha One', 'Yatra One', serif;
     --mandir-script: 'Pinyon Script', cursive;
     --mandir-sans: 'Marcellus', 'Inter', -apple-system, sans-serif;
     --mandir-digits: 'Cinzel', Georgia, serif;
@@ -31,23 +33,29 @@
   }
 }
 
-/* Bell Swing Animation */
-@keyframes swing-bell-left {
-  0% { transform: rotate(0deg); }
-  20% { transform: rotate(14deg); }
-  40% { transform: rotate(-10deg); }
-  60% { transform: rotate(6deg); }
-  80% { transform: rotate(-3deg); }
-  100% { transform: rotate(0deg); }
+/* Typography Utility Classes */
+.font-display {
+  font-family: var(--mandir-display);
 }
 
-@keyframes swing-bell-right {
-  0% { transform: rotate(0deg); }
-  20% { transform: rotate(-14deg); }
-  40% { transform: rotate(10deg); }
-  60% { transform: rotate(-6deg); }
-  80% { transform: rotate(3deg); }
-  100% { transform: rotate(0deg); }
+.font-regal {
+  font-family: var(--mandir-regal);
+}
+
+.font-shloka {
+  font-family: var(--mandir-shloka);
+}
+
+.font-script {
+  font-family: var(--mandir-script);
+}
+
+.font-body {
+  font-family: var(--mandir-sans);
+}
+
+.font-digits {
+  font-family: var(--mandir-digits);
 }
 
 /* Flag flutter animation */
@@ -74,19 +82,23 @@
   }
 }
 
-.animate-swing-left {
-  transform-origin: 50% 0;
-  animation: swing-bell-left 2.5s ease-in-out infinite;
-}
-
-.animate-swing-right {
-  transform-origin: 50% 0;
-  animation: swing-bell-right 2.8s ease-in-out infinite;
+/* Pulse Glow */
+@keyframes goldGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(221, 164, 93, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(221, 164, 93, 0.8));
+  }
 }
 
 .animate-flag {
   transform-origin: left center;
   animation: flag-wave 3.5s ease-in-out infinite;
+}
+
+.animate-gold-glow {
+  animation: goldGlow 4s ease-in-out infinite;
 }
 
 /* Gold Gradient Shimmer */
@@ -95,7 +107,7 @@
 }
 
 .gold-text-gradient {
-  background: linear-gradient(135deg, #ab5626 0%, #5f250f 100%);
+  background: linear-gradient(135deg, #dda45d 0%, #ab5626 50%, #5f250f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
