@@ -23,26 +23,26 @@ export const MandirFullCanvas: React.FC = () => {
   // Scrollytelling scroll tracking for Couple Names & Parallax Layers
   const { scrollY } = useScroll();
 
-  // Individual Scrollytelling Parallax for Hero Text Elements:
-  // Bride Name drifts gently
-  const brideX = useTransform(scrollY, [0, 600], [0, -25]);
-  const brideOpacity = useTransform(scrollY, [0, 600], [1, 0.9]);
+  // Scrollytelling Fading / Dissolving Effects for Hero Text Elements on Scroll:
+  // Bride Name drifts left and dissolves out
+  const brideX = useTransform(scrollY, [60, 340], [0, -70]);
+  const brideOpacity = useTransform(scrollY, [60, 300], [1, 0]);
 
-  // Groom Name drifts gently
-  const groomX = useTransform(scrollY, [0, 600], [0, 25]);
-  const groomOpacity = useTransform(scrollY, [0, 600], [1, 0.9]);
+  // Groom Name drifts right and dissolves out
+  const groomX = useTransform(scrollY, [60, 340], [0, 70]);
+  const groomOpacity = useTransform(scrollY, [60, 300], [1, 0]);
 
-  // Invocation & Host Message
-  const headerY = useTransform(scrollY, [0, 600], [0, -20]);
-  const headerOpacity = useTransform(scrollY, [0, 600], [1, 0.95]);
+  // Invocation & Host Message lift and dissolve out
+  const headerY = useTransform(scrollY, [40, 260], [0, -40]);
+  const headerOpacity = useTransform(scrollY, [40, 240], [1, 0]);
 
-  // Connective "weds"
-  const wedsScale = useTransform(scrollY, [0, 600], [1, 0.98]);
-  const wedsOpacity = useTransform(scrollY, [0, 600], [1, 0.95]);
+  // Connective "weds" scales down and dissolves
+  const wedsScale = useTransform(scrollY, [50, 280], [1, 0.75]);
+  const wedsOpacity = useTransform(scrollY, [50, 260], [1, 0]);
 
-  // Muhurat Badge
-  const muhuratY = useTransform(scrollY, [0, 600], [0, -15]);
-  const muhuratOpacity = useTransform(scrollY, [0, 600], [1, 0.95]);
+  // Muhurat Badge floats upward and dissolves
+  const muhuratY = useTransform(scrollY, [60, 320], [0, -30]);
+  const muhuratOpacity = useTransform(scrollY, [60, 290], [1, 0]);
 
   // Background Sun & Clouds parallax
   const sunY = useTransform(scrollY, [0, 600], [0, 40]);
@@ -295,14 +295,6 @@ export const MandirFullCanvas: React.FC = () => {
             </p>
           </motion.div>
 
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="relative z-30 pb-2 flex flex-col items-center text-[#5f250f]">
-          <span className="font-digits text-[10px] sm:text-xs uppercase tracking-widest font-semibold mb-0.5">
-            Scroll to Enter the Sacred Mandir
-          </span>
-          <ChevronDown className="w-4 h-4 md:w-5 md:h-5 animate-bounce text-[#ab5626]" />
         </div>
 
       </section>
