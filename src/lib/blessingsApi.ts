@@ -1,11 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../integrations/supabase/client';
 import type { Blessing } from '../types/wedding';
 
-// Publishable (anon) credentials — safe to ship in the browser.
-const URL = import.meta.env.VITE_SUPABASE_URL || 'https://ortaxblrnctvzomoxvin.supabase.co';
-const KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_lpQ30dRUdpwdyrSbeacNIA_dEZYUJEl';
-
-export const db = createClient(URL, KEY, { auth: { persistSession: false } });
+export const db = supabase;
 
 type Row = { id: string; guest_name: string; message: string; side: string | null; created_at: string };
 
