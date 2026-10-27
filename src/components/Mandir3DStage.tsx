@@ -200,7 +200,7 @@ export const Mandir3DStage: React.FC = () => {
                     y: coupleWalkY,
                     x: "-50%",
                   }}
-                  className="absolute left-[49.5%] bottom-[7.5%] w-[21%] min-w-[130px] max-w-[180px] z-30 flex flex-col items-center pointer-events-none"
+                  className="absolute left-[49.5%] bottom-[7.5%] w-[17%] sm:w-[21%] min-w-[56px] sm:min-w-[130px] max-w-[180px] z-30 flex flex-col items-center pointer-events-none"
                 >
                   {/* Soft Marble Ground Shadow */}
                   <div className="w-[85%] h-3 rounded-full bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-[#5f250f]/45 to-transparent blur-[2px] translate-y-2" />
