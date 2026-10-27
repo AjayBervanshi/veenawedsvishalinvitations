@@ -18,18 +18,18 @@ export const AudioDock: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex items-center gap-2">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2">
       {/* Tap Bell Quick Ring */}
       <button
         type="button"
         onClick={handleRingBell}
         title="Ring Temple Bell"
         aria-label="Ring Temple Bell"
-        className={`p-3 rounded-full bg-[#5f250f]/90 border border-[#dda45d]/60 text-[#dda45d] shadow-lg hover:bg-[#5f250f] active:scale-90 transition-all ${
+        className={`p-2.5 sm:p-3 rounded-full bg-[#5f250f]/90 border border-[#dda45d]/60 text-[#dda45d] shadow-lg hover:bg-[#5f250f] active:scale-90 transition-all ${
           isRinging ? 'rotate-12 scale-110' : ''
         }`}
       >
-        <Bell className="w-5 h-5" />
+        <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
       {/* Mute / Unmute Button */}
@@ -38,9 +38,9 @@ export const AudioDock: React.FC = () => {
         onClick={handleToggleMute}
         title={isMuted ? "Unmute Audio" : "Mute Audio"}
         aria-label={isMuted ? "Unmute Audio" : "Mute Audio"}
-        className="p-3 rounded-full bg-[#5f250f]/90 border border-[#dda45d]/60 text-[#dda45d] shadow-lg hover:bg-[#5f250f] active:scale-90 transition-all"
+        className="p-2.5 sm:p-3 rounded-full bg-[#5f250f]/90 border border-[#dda45d]/60 text-[#dda45d] shadow-lg hover:bg-[#5f250f] active:scale-90 transition-all"
       >
-        {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+        {isMuted ? <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" /> : <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />}
       </button>
     </div>
   );

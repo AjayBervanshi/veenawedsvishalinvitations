@@ -11,4 +11,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Test and Audit artifacts
+src/__tests__/
+audit_results/
+devtools_report/
+interactive_audit/
 screenshots/
+scratch/
+*.py
+*.ps1

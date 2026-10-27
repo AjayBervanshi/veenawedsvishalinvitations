@@ -1,3 +1,9 @@
+export interface EventColorSwatch {
+  name: string;
+  hex: string;
+  accentClass: string;
+}
+
 export interface WeddingEvent {
   id: string;
   title: string;
@@ -8,6 +14,9 @@ export interface WeddingEvent {
   dressCode?: string;
   description: string;
   iconName: string;
+  colorSwatch?: EventColorSwatch;
+  rituals?: string[];
+  calendarDates?: string;
 }
 
 export interface Blessing {

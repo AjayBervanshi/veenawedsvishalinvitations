@@ -15,7 +15,19 @@
     <!-- Typography System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800;900&family=Marcellus&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700;1,900&family=Rozha+One&family=Yatra+One&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Rozha+One&family=Yatra+One&family=Pinyon+Script&family=Marcellus&display=swap" rel="stylesheet">
+    
+    <!-- Immediate Scroll Restoration Reset & Smoothness Preloads -->
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    </script>
+    <link rel="preload" as="image" href="/assets/mandir/ganpati-icon-v1.webp" type="image/webp" fetchpriority="high" />
   </head>
   <body class="bg-[#fbf5eb] text-[#5f250f] overflow-x-hidden antialiased">
     <div id="root"></div>

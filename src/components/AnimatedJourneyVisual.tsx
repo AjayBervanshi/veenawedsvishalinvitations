@@ -39,7 +39,7 @@ export const AnimatedJourneyVisual: React.FC = () => {
       />
 
       {/* Center Medallion with Sacred Temple Couple Silhouettes & Floating Diya */}
-      <div className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-b from-[#ffffff] to-[#fbf5eb] border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.18)] flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+      <div className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-b from-[#ffffff]/90 via-[#fcf9f4]/85 to-[#f5effa]/85 backdrop-blur-md border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.14)] flex flex-col items-center justify-center p-4 text-center overflow-hidden">
         
         {/* Floating Sparkles in Background */}
         <motion.div
@@ -88,7 +88,7 @@ export const AnimatedJourneyVisual: React.FC = () => {
         <motion.div
           animate={{ scaleY: [1, 1.15, 0.95, 1], opacity: [0.85, 1, 0.85] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="mt-1 flex items-center gap-1 text-[10px] font-serif font-bold text-[#ab5626]"
+          className="mt-1 flex items-center gap-1 text-[10px] font-shloka font-bold text-[#ab5626]"
         >
           <span className="w-2 h-2 rounded-full bg-[#f39c12] shadow-[0_0_6px_#f39c12]" />
           <span>सदा सुहागन रहो</span>

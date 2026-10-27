@@ -19,9 +19,11 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['Cinzel', 'Playfair Display', 'Georgia', 'serif'],
-        sanskrit: ['Rozha One', 'Cinzel Decorative', 'serif'],
-        body: ['Marcellus', 'Crimson Pro', 'serif']
+        serif: ['Cinzel', 'Georgia', 'serif'],
+        display: ['Cinzel', 'Georgia', 'serif'],
+        body: ['Montserrat', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
+        sanskrit: ['Rozha One', 'serif']
       }
     },
   },
