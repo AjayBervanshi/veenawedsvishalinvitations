@@ -199,7 +199,7 @@ export const MandirFullCanvas: React.FC = () => {
     fetchBlessings().then((rows) => rows.length && setBlessings(rows)).catch(() => {});
     const channel = db
       .channel(`blessings-${Math.random().toString(36).slice(2)}`)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'blessings' }, (payload) => {
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'blessings' }, (payload: any) => {
         const b = toBlessing(payload.new as any);
         setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
       })
