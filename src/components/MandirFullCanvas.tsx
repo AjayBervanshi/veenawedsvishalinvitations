@@ -19,13 +19,9 @@ import {
 import confetti from 'canvas-confetti';
 import { Mandir3DStage } from './Mandir3DStage';
 import { AnimatedJourneyVisual } from './AnimatedJourneyVisual';
-import {
-  buildGoogleCalendarUrl,
-  copyTextToClipboard,
-  getStoredBlessings,
-  saveStoredBlessings,
-  deleteStoredBlessing
-} from '../utils/helpers';
+import { buildGoogleCalendarUrl, copyTextToClipboard } from '../utils/helpers';
+import { db, fetchBlessings, postBlessing, toBlessing } from '../lib/blessingsApi';
+import type { Blessing } from '../types/wedding';
 
 export const MandirFullCanvas: React.FC = () => {
   const heroRef = React.useRef<HTMLElement>(null);
@@ -192,36 +188,44 @@ export const MandirFullCanvas: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Blessing Wall State with LocalStorage Persistence
-  const [blessings, setBlessings] = useState(() => getStoredBlessings(initialBlessings));
+  // Blessing Wall — shared live database for every guest
+  const [blessings, setBlessings] = useState<Blessing[]>(initialBlessings);
   const [bName, setBName] = useState('');
   const [bMsg, setBMsg] = useState('');
   const [bSent, setBSent] = useState(false);
+  const [bSending, setBSending] = useState(false);
+  const [bError, setBError] = useState('');
 
-  const handleBlessingSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    fetchBlessings().then((rows) => rows.length && setBlessings(rows)).catch(() => {});
+    const channel = db
+      .channel(`blessings-${Math.random().toString(36).slice(2)}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'blessings' }, (payload) => {
+        const b = toBlessing(payload.new as any);
+        setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
+      })
+      .subscribe();
+    return () => { db.removeChannel(channel); };
+  }, []);
+
+  const handleBlessingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!bName.trim() || !bMsg.trim()) return;
-    confetti({ 
-      particleCount: 75, 
-      spread: 70, 
-      origin: { y: 0.8 }, 
-      colors: ['#dda45d', '#e67e22', '#e74c3c'] 
-    });
-    const updated = [
-      { id: Date.now().toString(), name: bName.trim(), relation: 'Guest', message: bMsg.trim(), timestamp: 'Just now' },
-      ...blessings
-    ];
-    setBlessings(updated);
-    saveStoredBlessings(updated);
-    setBName('');
-    setBMsg('');
-    setBSent(true);
-    setTimeout(() => setBSent(false), 4000);
-  };
-
-  const handleDeleteBlessing = (id: string) => {
-    const updated = deleteStoredBlessing(id, blessings);
-    setBlessings(updated);
+    if (!bName.trim() || !bMsg.trim() || bSending) return;
+    setBSending(true);
+    setBError('');
+    try {
+      const b = await postBlessing(bName.trim(), bMsg.trim());
+      setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
+      confetti({ particleCount: 75, spread: 70, origin: { y: 0.8 }, colors: ['#dda45d', '#e67e22', '#e74c3c'] });
+      setBName('');
+      setBMsg('');
+      setBSent(true);
+      setTimeout(() => setBSent(false), 4000);
+    } catch {
+      setBError('Could not post right now, please try again.');
+    } finally {
+      setBSending(false);
+    }
   };
 
 
