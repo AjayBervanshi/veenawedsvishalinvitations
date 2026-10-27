@@ -13,19 +13,14 @@ import {
   Flame,
   Heart,
   Copy,
-  Check,
-  Trash2
+  Check
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Mandir3DStage } from './Mandir3DStage';
 import { AnimatedJourneyVisual } from './AnimatedJourneyVisual';
-import {
-  buildGoogleCalendarUrl,
-  copyTextToClipboard,
-  getStoredBlessings,
-  saveStoredBlessings,
-  deleteStoredBlessing
-} from '../utils/helpers';
+import { buildGoogleCalendarUrl, copyTextToClipboard } from '../utils/helpers';
+import { db, fetchBlessings, postBlessing, toBlessing } from '../lib/blessingsApi';
+import type { Blessing } from '../types/wedding';
 
 export const MandirFullCanvas: React.FC = () => {
   const heroRef = React.useRef<HTMLElement>(null);
@@ -192,36 +187,44 @@ export const MandirFullCanvas: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Blessing Wall State with LocalStorage Persistence
-  const [blessings, setBlessings] = useState(() => getStoredBlessings(initialBlessings));
+  // Blessing Wall — shared live database for every guest
+  const [blessings, setBlessings] = useState<Blessing[]>(initialBlessings);
   const [bName, setBName] = useState('');
   const [bMsg, setBMsg] = useState('');
   const [bSent, setBSent] = useState(false);
+  const [bSending, setBSending] = useState(false);
+  const [bError, setBError] = useState('');
 
-  const handleBlessingSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    fetchBlessings().then((rows) => rows.length && setBlessings(rows)).catch(() => {});
+    const channel = db
+      .channel(`blessings-${Math.random().toString(36).slice(2)}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'blessings' }, (payload) => {
+        const b = toBlessing(payload.new as any);
+        setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
+      })
+      .subscribe();
+    return () => { db.removeChannel(channel); };
+  }, []);
+
+  const handleBlessingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!bName.trim() || !bMsg.trim()) return;
-    confetti({ 
-      particleCount: 75, 
-      spread: 70, 
-      origin: { y: 0.8 }, 
-      colors: ['#dda45d', '#e67e22', '#e74c3c'] 
-    });
-    const updated = [
-      { id: Date.now().toString(), name: bName.trim(), relation: 'Guest', message: bMsg.trim(), timestamp: 'Just now' },
-      ...blessings
-    ];
-    setBlessings(updated);
-    saveStoredBlessings(updated);
-    setBName('');
-    setBMsg('');
-    setBSent(true);
-    setTimeout(() => setBSent(false), 4000);
-  };
-
-  const handleDeleteBlessing = (id: string) => {
-    const updated = deleteStoredBlessing(id, blessings);
-    setBlessings(updated);
+    if (!bName.trim() || !bMsg.trim() || bSending) return;
+    setBSending(true);
+    setBError('');
+    try {
+      const b = await postBlessing(bName.trim(), bMsg.trim());
+      setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
+      confetti({ particleCount: 75, spread: 70, origin: { y: 0.8 }, colors: ['#dda45d', '#e67e22', '#e74c3c'] });
+      setBName('');
+      setBMsg('');
+      setBSent(true);
+      setTimeout(() => setBSent(false), 4000);
+    } catch {
+      setBError('Could not post right now, please try again.');
+    } finally {
+      setBSending(false);
+    }
   };
 
 
@@ -823,12 +826,14 @@ export const MandirFullCanvas: React.FC = () => {
               />
               <div className="flex justify-between items-center">
                 {bSent && <span className="font-body text-xs text-[#ab5626] font-bold">Blessing posted with joy!</span>}
+                {bError && <span className="font-body text-xs text-rose-700 font-bold">{bError}</span>}
                 <button
                   type="submit"
-                  className="ml-auto inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#5f250f] text-[#dda45d] font-digits text-xs font-bold uppercase tracking-wider hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                  disabled={bSending}
+                  className="ml-auto inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#5f250f] text-[#dda45d] font-digits text-xs font-bold uppercase tracking-wider hover:scale-105 active:scale-95 transition-transform cursor-pointer disabled:opacity-60"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Post Blessing</span>
+                  <span>{bSending ? 'Posting…' : 'Post Blessing'}</span>
                 </button>
               </div>
             </form>
@@ -838,17 +843,7 @@ export const MandirFullCanvas: React.FC = () => {
                 <div key={b.id} className="group relative p-3.5 rounded-2xl bg-white/70 backdrop-blur-sm border border-[#dda45d]/30 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#dda45d]/60 hover:shadow-sm">
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-display text-xs font-bold text-[#5f250f]">{b.name}</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-digits text-[10px] text-[#5f250f]/50">{b.timestamp}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteBlessing(b.id)}
-                        title="Delete this comment"
-                        className="opacity-60 hover:opacity-100 hover:text-rose-600 text-[#5f250f]/40 p-0.5 rounded transition-all cursor-pointer"
-                      >
-                        <Trash2 className="w-3 h-3" />
-                      </button>
-                    </div>
+                    <span className="font-digits text-[10px] text-[#5f250f]/50">{b.timestamp}</span>
                   </div>
                   <p className="font-body text-xs italic text-[#5f250f]/80">"{b.message}"</p>
                 </div>
