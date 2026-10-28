@@ -84,56 +84,86 @@
   100% { transform: skewY(0deg) scaleX(1); }
 }
 
-/* Realistic 3D Falling Petals - Continuous Linear Fall (Never Stalls in Middle) */
+/* Mobile & Universal Rock-Solid Falling Petal Keyframes (100% iOS/Android/Desktop compatible) */
+@keyframes petalFallLeft {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.85;
+  }
+  92% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(-38px, 115vh, 0) rotate(-240deg);
+    opacity: 0;
+  }
+}
+
+@keyframes petalFallRight {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.85;
+  }
+  92% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(38px, 115vh, 0) rotate(240deg);
+    opacity: 0;
+  }
+}
+
+@keyframes petalFallCenter {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.85;
+  }
+  92% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(14px, 115vh, 0) rotate(160deg);
+    opacity: 0;
+  }
+}
+
+@keyframes petalFlutter {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(0.86, 1.12) rotate(20deg);
+  }
+}
+
+/* Backward-compatible aliases */
 @keyframes petalFallSmooth {
-  0% {
-    transform: translate3d(0, -10vh, 0);
-    opacity: 0;
-  }
-  6% {
-    opacity: 0.85;
-  }
-  92% {
-    opacity: 0.85;
-  }
-  100% {
-    transform: translate3d(var(--drift-x, 30px), 115vh, 0);
-    opacity: 0;
-  }
+  0% { transform: translate3d(0, -10vh, 0); opacity: 0; }
+  6% { opacity: 0.85; }
+  92% { opacity: 0.85; }
+  100% { transform: translate3d(25px, 115vh, 0); opacity: 0; }
 }
 
-/* 3D Air-Resistance Flutter & Tumble */
 @keyframes petalTumble3D {
-  0% {
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-  }
-  35% {
-    transform: rotateX(140deg) rotateY(180deg) rotateZ(45deg);
-  }
-  70% {
-    transform: rotateX(260deg) rotateY(290deg) rotateZ(-30deg);
-  }
-  100% {
-    transform: rotateX(360deg) rotateY(360deg) rotateZ(80deg);
-  }
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(0.86, 1.12) rotate(20deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
 
-/* Backward-compatible alias */
 @keyframes petalFall {
-  0% {
-    transform: translate3d(0, -10vh, 0);
-    opacity: 0;
-  }
-  6% {
-    opacity: 0.85;
-  }
-  92% {
-    opacity: 0.85;
-  }
-  100% {
-    transform: translate3d(30px, 115vh, 0);
-    opacity: 0;
-  }
+  0% { transform: translate3d(0, -10vh, 0); opacity: 0; }
+  6% { opacity: 0.85; }
+  92% { opacity: 0.85; }
+  100% { transform: translate3d(25px, 115vh, 0); opacity: 0; }
 }
 
 /* Pulse Glow */

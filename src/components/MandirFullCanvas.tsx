@@ -447,7 +447,7 @@ export const MandirFullCanvas: React.FC = () => {
           {/* Gentle Scroll Cue When Ganesha is Centered */}
           <motion.div 
             style={{ opacity: scrollHintOpacity }}
-            className="absolute bottom-4 sm:bottom-6 z-30 flex flex-col items-center pointer-events-none px-4 text-center max-w-[240px] sm:max-w-none"
+            className="absolute bottom-20 sm:bottom-20 md:bottom-12 z-30 flex flex-col items-center pointer-events-none px-4 text-center max-w-[260px] sm:max-w-none"
           >
             <span className="text-[11px] sm:text-xs font-digits uppercase tracking-[0.25em] text-[#ab5626] font-bold">
               Scroll to unfold invitation
