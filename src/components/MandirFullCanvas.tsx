@@ -19,7 +19,7 @@ import confetti from 'canvas-confetti';
 import { Mandir3DStage } from './Mandir3DStage';
 import { AnimatedJourneyVisual } from './AnimatedJourneyVisual';
 import { buildGoogleCalendarUrl, copyTextToClipboard } from '../utils/helpers';
-import { db, fetchBlessings, postBlessing, toBlessing } from '../lib/blessingsApi';
+import { fetchBlessings, postBlessing, subscribeBlessings } from '../lib/blessingsApi';
 import type { Blessing } from '../types/wedding';
 
 export const MandirFullCanvas: React.FC = () => {
@@ -197,14 +197,22 @@ export const MandirFullCanvas: React.FC = () => {
 
   useEffect(() => {
     fetchBlessings().then((rows) => rows.length && setBlessings(rows)).catch(() => {});
-    const channel = db
-      .channel(`blessings-${Math.random().toString(36).slice(2)}`)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'blessings' }, (payload: any) => {
-        const b = toBlessing(payload.new as any);
-        setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
+
+    let cleanup: (() => void) | undefined;
+    let cancelled = false;
+    subscribeBlessings((b) => {
+      if (cancelled) return;
+      setBlessings((prev) => (prev.some((p) => p.id === b.id) ? prev : [b, ...prev]));
+    })
+      .then((off) => {
+        if (cancelled) off();
+        else cleanup = off;
       })
-      .subscribe();
-    return () => { db.removeChannel(channel); };
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
   }, []);
 
   const handleBlessingSubmit = async (e: React.FormEvent) => {
@@ -319,7 +327,6 @@ export const MandirFullCanvas: React.FC = () => {
                       src="/assets/mandir/ganpati-icon-v1.webp" 
                       alt="Lord Ganesha Sacred Invocation" 
                       loading="eager"
-                      fetchPriority="high"
                       decoding="sync"
                       className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain drop-shadow-[0_10px_25px_rgba(221,164,93,0.5)] filter brightness-110 hover:scale-105 transition-transform duration-300" 
                     />
