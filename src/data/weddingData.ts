@@ -63,7 +63,7 @@ export const weddingData: WeddingData = {
       date: "Monday, 30 Nov 2026",
       time: "Baraat: 7:00 PM | Varmala: 8:30 PM | Phere: 10:00 PM",
       venue: "Hotel Adarsh Vatika | Banquet Hall in Ballia, Uttar Pradesh",
-      dressCode: "Royal Traditional Indian Attire (भव्य पारंपरिक परिधान)",
+      dressCode: "Traditional Indian Attire (पारंपरिक परिधान)",
       description: "Taking the seven sacred vows around the holy fire as Veena Singh and Vishal Singh unite for eternity amidst Vedic chants.",
       iconName: "Flame",
       colorSwatch: {
@@ -87,20 +87,7 @@ export const initialBlessings: Blessing[] = [
     name: "Singh Family",
     relation: "Family",
     message: "Heartiest congratulations to Veena & Vishal! May Mahadev and Maa Parvati shower their infinite blessings on your married life!",
-    timestamp: "2 hours ago"
-  },
-  {
-    id: "2",
-    name: "Rameshwar Singh & Family",
-    relation: "Ballia Relatives",
-    message: "Warmest blessings for the grand wedding celebrations at Hotel Adarsh Vatika. Sada sukhi raho!",
-    timestamp: "5 hours ago"
-  },
-  {
-    id: "3",
-    name: "Pooja & Amit",
-    relation: "Friends",
-    message: "Can't wait to dance at the Haldi, Mehndi, and Baraat! Wishing Veena and Vishal a lifetime of love and happiness! #VeenaWedsVishal",
-    timestamp: "1 day ago"
+    timestamp: "Just now"
   }
 ];
+

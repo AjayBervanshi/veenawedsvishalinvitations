@@ -1,10 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Heart } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { soundManager } from '../utils/sound';
 
 export const AnimatedJourneyVisual: React.FC = () => {
+  const [isShowering, setIsShowering] = useState(false);
+
+  const handleMedallionClick = (e?: React.SyntheticEvent<HTMLElement>) => {
+    // Play auspicious temple bell chime
+    soundManager.playBellChime();
+
+    setIsShowering(true);
+    setTimeout(() => setIsShowering(false), 1200);
+
+    // Compute coordinate origin if mouse event, fallback to center
+    let x = 0.5;
+    let y = 0.5;
+    if (e && 'currentTarget' in e && e.currentTarget) {
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      x = (rect.left + rect.width / 2) / window.innerWidth;
+      y = (rect.top + rect.height / 2) / window.innerHeight;
+    }
+
+    // Sacred Floral Petal Shower: Marigold gold, orange, auspicious rose red & lotus pink
+    confetti({
+      particleCount: 50,
+      spread: 85,
+      origin: { x, y },
+      colors: ['#e74c3c', '#ff6b81', '#f39c12', '#e67e22', '#ffd700', '#ffffff'],
+      shapes: ['circle'],
+      scalar: 1.25,
+      ticks: 180,
+    });
+
+    // Secondary soft floral sparkle drift
+    setTimeout(() => {
+      confetti({
+        particleCount: 35,
+        spread: 65,
+        origin: { x, y: Math.max(0.1, y - 0.05) },
+        colors: ['#dda45d', '#ffd700', '#ff9ff3', '#feca57'],
+        scalar: 0.95,
+        ticks: 150,
+      });
+    }, 140);
+  };
+
   return (
-    <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto flex items-center justify-center">
+    <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto flex flex-col items-center justify-center">
       {/* Outer Rotating Sacred Mandala Ring */}
       <motion.div
         animate={{ rotate: 360 }}
@@ -33,14 +77,33 @@ export const AnimatedJourneyVisual: React.FC = () => {
 
       {/* Pulsing Sacred Golden Aura */}
       <motion.div
-        animate={{ scale: [0.98, 1.04, 0.98], opacity: [0.6, 0.9, 0.6] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute inset-6 rounded-full bg-gradient-to-tr from-[#dda45d]/20 via-[#ab5626]/10 to-[#5f250f]/20 blur-md pointer-events-none"
+        animate={
+          isShowering
+            ? { scale: [1, 1.25, 1], opacity: [0.8, 1, 0.8] }
+            : { scale: [0.98, 1.04, 0.98], opacity: [0.6, 0.9, 0.6] }
+        }
+        transition={isShowering ? { duration: 0.6 } : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute inset-6 rounded-full bg-gradient-to-tr from-[#dda45d]/30 via-[#ab5626]/20 to-[#5f250f]/30 blur-md pointer-events-none"
       />
 
       {/* Center Medallion with Sacred Temple Couple Silhouettes & Floating Diya */}
-      <div className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-b from-[#ffffff]/90 via-[#fcf9f4]/85 to-[#f5effa]/85 backdrop-blur-md border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.14)] flex flex-col items-center justify-center p-4 text-center overflow-hidden">
-        
+      {/* Interactive: Tap to shower auspicious flower petals and ring temple bell */}
+      <motion.div
+        role="button"
+        tabIndex={0}
+        title="Tap to shower flower petals & sacred blessings 🌸"
+        aria-label="Tap to shower flowers & sacred blessings"
+        onClick={handleMedallionClick}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleMedallionClick(e);
+          }
+        }}
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.95 }}
+        className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-b from-[#ffffff]/95 via-[#fcf9f4]/90 to-[#f5effa]/90 backdrop-blur-md border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.16)] flex flex-col items-center justify-center p-4 text-center overflow-hidden cursor-pointer group select-none transition-shadow hover:shadow-[0_20px_45px_rgba(221,164,93,0.4)]"
+      >
         {/* Floating Sparkles in Background */}
         <motion.div
           animate={{ y: [-4, 4, -4], opacity: [0.4, 0.9, 0.4] }}
@@ -66,10 +129,10 @@ export const AnimatedJourneyVisual: React.FC = () => {
         >
           {/* Dual Interlocking Golden Rings / Sacred Knot */}
           <div className="flex items-center justify-center -space-x-3">
-            <div className="w-10 h-10 rounded-full border-3 border-[#dda45d] shadow-sm flex items-center justify-center bg-white/50">
+            <div className="w-10 h-10 rounded-full border-3 border-[#dda45d] shadow-sm flex items-center justify-center bg-white/60">
               <span className="text-[10px] font-serif font-bold text-[#ab5626]">V</span>
             </div>
-            <div className="w-10 h-10 rounded-full border-3 border-[#ab5626] shadow-sm flex items-center justify-center bg-white/50">
+            <div className="w-10 h-10 rounded-full border-3 border-[#ab5626] shadow-sm flex items-center justify-center bg-white/60">
               <span className="text-[10px] font-serif font-bold text-[#5f250f]">V</span>
             </div>
           </div>
@@ -93,16 +156,26 @@ export const AnimatedJourneyVisual: React.FC = () => {
           <span className="w-2 h-2 rounded-full bg-[#f39c12] shadow-[0_0_6px_#f39c12]" />
           <span>सदा सुहागन रहो</span>
         </motion.div>
-      </div>
-
-      {/* Floating Bottom Heart Medallion */}
-      <motion.div 
-        animate={{ y: [0, -3, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -bottom-2 z-20 p-2.5 rounded-full bg-[#5f250f] border-2 border-[#dda45d] text-[#dda45d] shadow-lg"
-      >
-        <Heart className="w-4 h-4 fill-current text-[#dda45d]" />
       </motion.div>
+
+      {/* Floating Bottom Heart Medallion with Flower Shower Cue */}
+      <motion.button 
+        type="button"
+        onClick={handleMedallionClick}
+        aria-label="Shower flowers & sacred blessings"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute -bottom-2 z-20 p-2.5 rounded-full bg-[#5f250f] border-2 border-[#dda45d] text-[#dda45d] shadow-lg cursor-pointer hover:bg-[#dda45d] hover:text-[#5f250f] transition-colors"
+      >
+        <Heart className="w-4 h-4 fill-current text-inherit" />
+      </motion.button>
+
+      {/* Gentle helper hint under medallion */}
+      <div className="absolute -bottom-7 z-20 pointer-events-none">
+        <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#dda45d]/40 text-[9px] font-body text-[#ab5626] font-semibold shadow-xs">
+          🌸 Tap for flower shower
+        </span>
+      </div>
     </div>
   );
 };

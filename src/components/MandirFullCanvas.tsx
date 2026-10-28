@@ -391,17 +391,14 @@ export const MandirFullCanvas: React.FC = () => {
                 {/* BRIDE'S NAME: Full Descender Clearance for 'g' in Singh (Enters from Left, Exits to Right) */}
                 <motion.div 
                   style={{ x: brideX }}
-                  className="relative z-10 my-1 overflow-visible py-1 flex flex-col items-center"
+                  className="relative z-10 my-1.5 overflow-visible py-1 flex flex-col items-center"
                 >
                   <motion.span 
                     style={{ letterSpacing: namesTracking }}
-                    className="inline-block font-regal font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-[#2c1222] via-[#661b32] to-[#ab6524] bg-clip-text text-transparent leading-[1.38] pb-3.5 pt-1 px-4 overflow-visible drop-shadow-[0_4px_16px_rgba(221,164,93,0.30)] hover:brightness-110 transition-all duration-300"
+                    className="inline-block font-regal font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-[#2c1222] via-[#661b32] to-[#ab6524] bg-clip-text text-transparent leading-[1.38] pb-2 pt-1 px-4 overflow-visible drop-shadow-[0_4px_16px_rgba(221,164,93,0.30)] hover:brightness-110 transition-all duration-300"
                   >
                     {weddingData.brideName}
                   </motion.span>
-                  <p className="font-body text-xs sm:text-sm md:text-base text-[#4b2f5b]/80 italic -mt-0.5 mb-1">
-                    Daughter of {weddingData.brideParents}
-                  </p>
                 </motion.div>
 
                 {/* SACRED CONNECTIVE "weds" */}
@@ -419,17 +416,14 @@ export const MandirFullCanvas: React.FC = () => {
                 {/* GROOM'S NAME: Full Descender Clearance for 'g' in Singh (Enters from Right, Exits to Left) */}
                 <motion.div 
                   style={{ x: groomX }}
-                  className="relative z-10 my-1 overflow-visible py-1 flex flex-col items-center"
+                  className="relative z-10 my-1.5 overflow-visible py-1 flex flex-col items-center"
                 >
                   <motion.span 
                     style={{ letterSpacing: namesTracking }}
-                    className="inline-block font-regal font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-[#2c1222] via-[#661b32] to-[#ab6524] bg-clip-text text-transparent leading-[1.38] pb-3.5 pt-1 px-4 overflow-visible drop-shadow-[0_4px_16px_rgba(221,164,93,0.30)] hover:brightness-110 transition-all duration-300"
+                    className="inline-block font-regal font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-[#2c1222] via-[#661b32] to-[#ab6524] bg-clip-text text-transparent leading-[1.38] pb-2 pt-1 px-4 overflow-visible drop-shadow-[0_4px_16px_rgba(221,164,93,0.30)] hover:brightness-110 transition-all duration-300"
                   >
                     {weddingData.groomName}
                   </motion.span>
-                  <p className="font-body text-xs sm:text-sm md:text-base text-[#4b2f5b]/80 italic -mt-0.5 mb-1">
-                    Son of {weddingData.groomParents}
-                  </p>
                 </motion.div>
 
                 {/* AUSPICIOUS MUHURAT BADGE: Golden Pill with Radiant Pulse */}
@@ -455,13 +449,16 @@ export const MandirFullCanvas: React.FC = () => {
             style={{ opacity: scrollHintOpacity }}
             className="absolute bottom-4 sm:bottom-6 z-30 flex flex-col items-center pointer-events-none px-4 text-center max-w-[240px] sm:max-w-none"
           >
-            <span className="text-[10px] sm:text-xs font-digits uppercase tracking-[0.25em] text-[#ab5626] font-bold">
+            <span className="text-[11px] sm:text-xs font-digits uppercase tracking-[0.25em] text-[#ab5626] font-bold">
               Scroll to unfold invitation
             </span>
-            <ArrowDown 
-              className="w-5 h-5 sm:w-6 sm:h-6 text-[#dda45d] animate-bounce mt-1.5 drop-shadow-[0_2px_6px_rgba(221,164,93,0.4)]" 
-              strokeWidth={2.5} 
-            />
+            <div className="relative mt-2 flex items-center justify-center animate-bounce">
+              <div className="absolute inset-0 rounded-full bg-[#dda45d]/30 blur-md scale-150" />
+              <ArrowDown 
+                className="w-9 h-9 sm:w-11 sm:h-11 text-[#ab5626] drop-shadow-[0_4px_12px_rgba(171,86,38,0.4)] relative z-10" 
+                strokeWidth={3} 
+              />
+            </div>
           </motion.div>
 
         </motion.div>

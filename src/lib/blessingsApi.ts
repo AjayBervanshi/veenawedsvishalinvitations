@@ -28,6 +28,27 @@ export const toBlessing = (r: Row): Blessing => ({
   timestamp: fmt(r.created_at),
 });
 
+const SEEDED_FAKE_NAMES = new Set([
+  'rajmata shanti devi (naniji, ballia)',
+  'mamaji arun kumar singh & family (ballia)',
+  'chacha ramesh singh & chachi sunita (varanasi)',
+  'dadi vimla devi (maheshwar, mp)',
+  'tau deen dayal & tauji family (ballia)',
+  'bua sushma & phuphaji (bhopal, mp)',
+  'cousins rohit, priya & aarav (mumbai)',
+  'mausi kavita & mausaji (lucknow)',
+  'rameshwar singh & family',
+  'rameshwar singh',
+  'test check bot'
+]);
+
+const isRealBlessing = (r: Row): boolean => {
+  const name = (r.guest_name || '').trim().toLowerCase();
+  const msg = (r.message || '').trim().toLowerCase();
+  if (SEEDED_FAKE_NAMES.has(name) || name.includes('rameshwar')) return false;
+  return !(name.includes('bot') || name.includes('playwright') || msg.includes('playwright') || (name.includes('test') && msg.includes('test')));
+};
+
 export async function fetchBlessings(): Promise<Blessing[]> {
   const db = await getDb();
   if (!db) return [];
@@ -37,7 +58,7 @@ export async function fetchBlessings(): Promise<Blessing[]> {
     .order('created_at', { ascending: false })
     .limit(100);
   if (error) throw error;
-  return (data as Row[]).map(toBlessing);
+  return (data as Row[]).filter(isRealBlessing).map(toBlessing);
 }
 
 export async function postBlessing(name: string, message: string): Promise<Blessing> {
@@ -60,7 +81,10 @@ export async function subscribeBlessings(
   const channel = db
     .channel(`blessings-${Math.random().toString(36).slice(2)}`)
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'blessings' }, (payload: any) => {
-      onInsert(toBlessing(payload.new as Row));
+      const row = payload.new as Row;
+      if (isRealBlessing(row)) {
+        onInsert(toBlessing(row));
+      }
     })
     .subscribe();
   return () => {
