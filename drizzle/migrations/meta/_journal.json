@@ -8,6 +8,13 @@
       "when": 1793169449396,
       "tag": "0000_rsvp_rls_lock_down",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793169884485,
+      "tag": "0001_rsvp_insert_validation",
+      "breakpoints": true
     }
   ]
 }
