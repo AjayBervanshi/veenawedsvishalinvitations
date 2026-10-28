@@ -12,14 +12,12 @@ import {
   Sparkles,
   Sun,
   Flame,
-  Heart,
-  Copy,
-  Check
+  Heart
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Mandir3DStage } from './Mandir3DStage';
 import { AnimatedJourneyVisual } from './AnimatedJourneyVisual';
-import { buildGoogleCalendarUrl, copyTextToClipboard } from '../utils/helpers';
+import { buildGoogleCalendarUrl } from '../utils/helpers';
 import { fetchBlessings, postBlessing, subscribeBlessings } from '../lib/blessingsApi';
 import type { Blessing } from '../types/wedding';
 
@@ -48,19 +46,9 @@ export const MandirFullCanvas: React.FC = () => {
   }, [smoothHeroProgress]);
 
   const [expandedRituals, setExpandedRituals] = useState<Record<string, boolean>>({});
-  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const toggleRitual = (id: string) => {
     setExpandedRituals((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const copyEventDetails = async (event: typeof weddingData.events[0]) => {
-    const text = `🌸 ${event.title} (${event.hindiTitle || ''})\n📅 Date: ${event.date}\n⏰ Time: ${event.time}\n📍 Venue: ${event.venue}\n👗 Attire: ${event.dressCode || 'Royal Indian Traditional'}\n${weddingData.hashtag}`;
-    const success = await copyTextToClipboard(text);
-    if (success) {
-      setCopiedId(event.id);
-      setTimeout(() => setCopiedId(null), 2500);
-    }
   };
 
   // ==============================================================
@@ -614,35 +602,17 @@ export const MandirFullCanvas: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Action Buttons: Add to Calendar & Copy Details */}
-                  <div className="flex items-center justify-center gap-2 pt-1">
+                  {/* Action Button: Add to Calendar */}
+                  <div className="flex items-center justify-center pt-1">
                     <a
                       href={buildGoogleCalendarUrl(event, weddingData.brideName, weddingData.groomName)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#dda45d] bg-[#fbf5eb] font-digits text-[11px] uppercase tracking-wider text-[#5f250f] font-bold shadow-sm hover:scale-105 active:scale-95 hover:bg-[#dda45d] hover:text-[#5f250f] hover:shadow-md transition-all duration-200"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-[#dda45d] bg-[#fbf5eb] font-digits text-[11px] uppercase tracking-wider text-[#5f250f] font-bold shadow-sm hover:scale-105 active:scale-95 hover:bg-[#dda45d] hover:text-[#5f250f] hover:shadow-md transition-all duration-200"
                     >
                       <Calendar className="w-3.5 h-3.5 text-[#ab5626]" />
-                      <span>Calendar</span>
+                      <span>Add to Calendar</span>
                     </a>
-
-                    <button
-                      type="button"
-                      onClick={() => copyEventDetails(event)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#dda45d]/60 bg-[#fbf5eb] font-digits text-[11px] uppercase tracking-wider text-[#5f250f] font-bold shadow-sm hover:scale-105 active:scale-95 hover:border-[#dda45d] hover:bg-[#ffffff] hover:shadow-md transition-all duration-200 cursor-pointer"
-                    >
-                      {copiedId === event.id ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
-                          <span className="text-emerald-700">Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5 text-[#ab5626]" />
-                          <span>Copy</span>
-                        </>
-                      )}
-                    </button>
                   </div>
                 </div>
               </div>
