@@ -31,7 +31,7 @@ export const FloatingPetals: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-30 overflow-hidden" aria-hidden="true">
+    <div className="fixed inset-0 pointer-events-none z-35 overflow-hidden" aria-hidden="true">
       {petals.map((p, idx) => (
         <div
           key={idx}

@@ -18,7 +18,7 @@ export const AudioDock: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2">
+    <div className="fixed bottom-6 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 pb-[env(safe-area-inset-bottom,0px)]">
       {/* Tap Bell Quick Ring */}
       <button
         type="button"

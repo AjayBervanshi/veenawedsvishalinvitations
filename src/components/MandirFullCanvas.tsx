@@ -82,61 +82,61 @@ export const MandirFullCanvas: React.FC = () => {
   // - Hands off directly to next page (0.78 -> 1.00) with zero dead delay
   const ganeshY = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
-    ['0vh', '0vh', '-34vh', '-34vh', '-48vh']
+    [0.00, 0.08, 0.22, 0.68, 0.88],
+    ['0vh', '0vh', '-33vh', '-33vh', '-48vh']
   );
   const ganeshScale = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
+    [0.00, 0.08, 0.22, 0.68, 0.88],
     [1.05, 1.05, 0.72, 0.72, 0.66]
   );
   const ganeshOpacity = useTransform(
     smoothHeroProgress,
-    [0.00, 0.50, 0.78],
+    [0.00, 0.68, 0.88],
     [1, 1, 0]
   );
 
   // Host message dissolves quickly as Ganesha glides up
   const hostMessageOpacity = useTransform(
     smoothHeroProgress,
-    [0.00, 0.04, 0.10],
+    [0.00, 0.04, 0.12],
     [1, 1, 0]
   );
   const hostMessageScale = useTransform(
     smoothHeroProgress,
-    [0.00, 0.10],
+    [0.00, 0.12],
     [1, 0.92]
   );
 
   // Couple names: Silky soft-focus entrance & slow majestic dissolve
   const namesOpacity = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
+    [0.00, 0.08, 0.22, 0.68, 0.88],
     [0, 0, 1, 1, 0]
   );
   const namesScale = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
-    [0.86, 0.86, 1.0, 1.0, 0.92]
+    [0.00, 0.08, 0.22, 0.68, 0.88],
+    [0.88, 0.88, 1.0, 1.0, 0.94]
   );
   const namesY = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
-    ['14vh', '14vh', '4.5vh', '4.5vh', '-6vh']
+    [0.00, 0.08, 0.22, 0.68, 0.88],
+    ['12vh', '12vh', '2vh', '2vh', '-6vh']
   );
   const namesBlur = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.22, 0.50, 0.78],
+    [0.00, 0.08, 0.20, 0.68, 0.88],
     ['blur(8px)', 'blur(8px)', 'blur(0px)', 'blur(0px)', 'blur(12px)']
   );
   const namesTracking = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
+    [0.00, 0.08, 0.22, 0.68, 0.88],
     ['0.02em', '0.02em', '0.00em', '0.00em', '0.04em']
   );
   const wedsScale = useTransform(
     smoothHeroProgress,
-    [0.10, 0.25],
+    [0.08, 0.22],
     [0.65, 1.0]
   );
 
@@ -145,19 +145,19 @@ export const MandirFullCanvas: React.FC = () => {
   // - Groom (Vishal Singh): Enters from the right (+70px -> 0px), holds dead center, departs to the left (0px -> -85px)
   const brideX = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
+    [0.00, 0.08, 0.22, 0.68, 0.88],
     ['-70px', '-70px', '0px', '0px', '85px']
   );
   const groomX = useTransform(
     smoothHeroProgress,
-    [0.00, 0.08, 0.25, 0.50, 0.78],
+    [0.00, 0.08, 0.22, 0.68, 0.88],
     ['70px', '70px', '0px', '0px', '-85px']
   );
 
   // Seamless Handoff: Hero sticky window softly cross-fades directly into Mandir stage
   const heroWindowOpacity = useTransform(
     smoothHeroProgress,
-    [0.00, 0.78, 0.98],
+    [0.00, 0.82, 0.98],
     [1, 1, 0]
   );
 
@@ -447,7 +447,7 @@ export const MandirFullCanvas: React.FC = () => {
           {/* Gentle Scroll Cue When Ganesha is Centered */}
           <motion.div 
             style={{ opacity: scrollHintOpacity }}
-            className="absolute bottom-20 sm:bottom-20 md:bottom-12 z-30 flex flex-col items-center pointer-events-none px-4 text-center max-w-[260px] sm:max-w-none"
+            className="absolute bottom-28 sm:bottom-28 md:bottom-16 z-30 flex flex-col items-center pointer-events-none px-4 text-center max-w-xs sm:max-w-none"
           >
             <span className="text-[11px] sm:text-xs font-digits uppercase tracking-[0.25em] text-[#ab5626] font-bold">
               Scroll to unfold invitation
@@ -455,7 +455,7 @@ export const MandirFullCanvas: React.FC = () => {
             <div className="relative mt-2 flex items-center justify-center animate-bounce">
               <div className="absolute inset-0 rounded-full bg-[#dda45d]/30 blur-md scale-150" />
               <ArrowDown 
-                className="w-9 h-9 sm:w-11 sm:h-11 text-[#ab5626] drop-shadow-[0_4px_12px_rgba(171,86,38,0.4)] relative z-10" 
+                className="w-8 h-8 sm:w-10 sm:h-10 text-[#ab5626] drop-shadow-[0_4px_12px_rgba(171,86,38,0.4)] relative z-10" 
                 strokeWidth={3} 
               />
             </div>
