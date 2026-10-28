@@ -10,7 +10,7 @@ export interface WeddingEvent {
   hindiTitle?: string;
   date: string;
   time: string;
-  venue: string;
+  venue?: string;
   dressCode?: string;
   description: string;
   iconName: string;

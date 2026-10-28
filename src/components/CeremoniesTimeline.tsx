@@ -22,7 +22,7 @@ export const CeremoniesTimeline: React.FC<CeremoniesTimelineProps> = ({ events }
   const createGoogleCalendarLink = (event: WeddingEvent) => {
     const title = encodeURIComponent(`${event.title} - Veena & Vishal Wedding`);
     const details = encodeURIComponent(`${event.description}\nDress Code: ${event.dressCode || 'Traditional'}`);
-    const location = encodeURIComponent(event.venue);
+    const location = encodeURIComponent(event.venue || '');
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
   };
 
@@ -107,10 +107,12 @@ export const CeremoniesTimeline: React.FC<CeremoniesTimelineProps> = ({ events }
                   <Clock className="w-3.5 h-3.5 text-[#ab5626] shrink-0" />
                   <span className="font-semibold text-[#5f250f]">{event.time}</span>
                 </div>
-                <div className="flex items-center gap-2 sm:col-span-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#ab5626] shrink-0" />
-                  <span>{event.venue}</span>
-                </div>
+                {event.venue && (
+                  <div className="flex items-center gap-2 sm:col-span-2">
+                    <MapPin className="w-3.5 h-3.5 text-[#ab5626] shrink-0" />
+                    <span>{event.venue}</span>
+                  </div>
+                )}
               </div>
 
               {/* Description & Dress Code */}

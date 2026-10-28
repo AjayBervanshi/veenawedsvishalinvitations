@@ -8,6 +8,7 @@ import {
   Clock, 
   MapPin, 
   ChevronDown, 
+  ArrowDown,
   Sparkles,
   Sun,
   Flame,
@@ -457,9 +458,10 @@ export const MandirFullCanvas: React.FC = () => {
             <span className="text-[10px] sm:text-xs font-digits uppercase tracking-[0.25em] text-[#ab5626] font-bold">
               Scroll to unfold invitation
             </span>
-            <span className="text-[#dda45d] text-sm animate-bounce mt-1">
-              ↓
-            </span>
+            <ArrowDown 
+              className="w-5 h-5 sm:w-6 sm:h-6 text-[#dda45d] animate-bounce mt-1.5 drop-shadow-[0_2px_6px_rgba(221,164,93,0.4)]" 
+              strokeWidth={2.5} 
+            />
           </motion.div>
 
         </motion.div>
@@ -500,7 +502,7 @@ export const MandirFullCanvas: React.FC = () => {
               Functions
             </h2>
             <p className="font-body text-xs md:text-sm text-[#ab5626] font-semibold mt-1">
-              We warmly invite you to share in these joyous occasions at Hotel Adarsh Vatika, Ballia
+              We warmly invite you to share in these joyous wedding festivities and sacred ceremonies
             </p>
             <img src="/assets/mandir/ornament-band-v1.webp" alt="" className="w-44 h-auto mx-auto mt-2 opacity-75" />
           </div>
@@ -551,11 +553,13 @@ export const MandirFullCanvas: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Venue Location */}
-                  <p className="font-body text-xs text-[#5f250f]/80 flex items-center justify-center gap-1 my-2">
-                    <MapPin className="w-3.5 h-3.5 text-[#dda45d] shrink-0" />
-                    <span>{event.venue}</span>
-                  </p>
+                  {/* Venue Location (Rendered only when present) */}
+                  {event.venue && (
+                    <p className="font-body text-xs text-[#5f250f]/80 flex items-center justify-center gap-1 my-2">
+                      <MapPin className="w-3.5 h-3.5 text-[#dda45d] shrink-0" />
+                      <span>{event.venue}</span>
+                    </p>
+                  )}
 
                   {/* Color Swatch Indicator */}
                   {event.colorSwatch && (

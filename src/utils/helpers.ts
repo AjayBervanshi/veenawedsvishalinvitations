@@ -15,7 +15,7 @@ export function buildGoogleCalendarUrl(
 
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     title
-  )}${datesParam}&location=${encodeURIComponent(event.venue)}&details=${encodeURIComponent(
+  )}${datesParam}&location=${encodeURIComponent(event.venue || '')}&details=${encodeURIComponent(
     event.description
   )}`;
 }
