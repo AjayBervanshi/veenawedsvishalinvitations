@@ -327,7 +327,7 @@ export const MandirFullCanvas: React.FC = () => {
                       src="/assets/mandir/ganpati-icon-v1.webp" 
                       alt="Lord Ganesha Sacred Invocation" 
                       loading="eager"
-                      fetchPriority="high"
+                      fetchpriority="high"
                       decoding="sync"
                       className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain drop-shadow-[0_10px_25px_rgba(221,164,93,0.5)] filter brightness-110 hover:scale-105 transition-transform duration-300" 
                     />
