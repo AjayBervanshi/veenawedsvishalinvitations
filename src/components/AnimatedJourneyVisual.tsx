@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/sound';
 
@@ -86,13 +86,13 @@ export const AnimatedJourneyVisual: React.FC = () => {
         className="absolute inset-6 rounded-full bg-gradient-to-tr from-[#dda45d]/30 via-[#ab5626]/20 to-[#5f250f]/30 blur-md pointer-events-none"
       />
 
-      {/* Center Medallion with Sacred Temple Couple Silhouettes & Floating Diya */}
+      {/* Center Medallion with Couple Portrait Photo */}
       {/* Interactive: Tap to shower auspicious flower petals and ring temple bell */}
       <motion.div
         role="button"
         tabIndex={0}
         title="Tap to shower flower petals & sacred blessings 🌸"
-        aria-label="Tap to shower flowers & sacred blessings"
+        aria-label="Tap to shower flowers & sacred blessings — सदा सुहागन रहो"
         onClick={handleMedallionClick}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -102,60 +102,17 @@ export const AnimatedJourneyVisual: React.FC = () => {
         }}
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.95 }}
-        className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full bg-gradient-to-b from-[#ffffff]/95 via-[#fcf9f4]/90 to-[#f5effa]/90 backdrop-blur-md border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.16)] flex flex-col items-center justify-center p-4 text-center overflow-hidden cursor-pointer group select-none transition-shadow hover:shadow-[0_20px_45px_rgba(221,164,93,0.4)]"
+        className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.22)] overflow-hidden cursor-pointer group select-none transition-shadow hover:shadow-[0_20px_45px_rgba(221,164,93,0.5)] bg-[#fcf9f4]"
       >
-        {/* Floating Sparkles in Background */}
-        <motion.div
-          animate={{ y: [-4, 4, -4], opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-3 left-4 text-[#dda45d]"
-        >
-          <Sparkles className="w-4 h-4" />
-        </motion.div>
-        
-        <motion.div
-          animate={{ y: [4, -4, 4], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          className="absolute bottom-4 right-4 text-[#ab5626]"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-        </motion.div>
+        <img
+          src="/assets/mandir/couple-portrait.jpg"
+          alt="Veena & Vishal — सदा सुहागन रहो"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          loading="eager"
+        />
 
-        {/* Intertwined Sacred Varmala Symbol */}
-        <motion.div
-          animate={{ scale: [1, 1.06, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          className="relative mb-2"
-        >
-          {/* Dual Interlocking Golden Rings / Sacred Knot */}
-          <div className="flex items-center justify-center -space-x-3">
-            <div className="w-10 h-10 rounded-full border-3 border-[#dda45d] shadow-sm flex items-center justify-center bg-white/60">
-              <span className="text-[10px] font-serif font-bold text-[#ab5626]">V</span>
-            </div>
-            <div className="w-10 h-10 rounded-full border-3 border-[#ab5626] shadow-sm flex items-center justify-center bg-white/60">
-              <span className="text-[10px] font-serif font-bold text-[#5f250f]">V</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Sacred Union Motto */}
-        <span className="font-regal text-sm sm:text-base font-bold text-[#5f250f] tracking-wide">
-          Veena & Vishal
-        </span>
-        
-        <span className="font-script text-base text-[#dda45d] font-semibold -mt-0.5">
-          Eternal Companionship
-        </span>
-
-        {/* Auspicious Diya Flame Animation */}
-        <motion.div
-          animate={{ scaleY: [1, 1.15, 0.95, 1], opacity: [0.85, 1, 0.85] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="mt-1 flex items-center gap-1 text-[10px] font-shloka font-bold text-[#ab5626]"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#f39c12] shadow-[0_0_6px_#f39c12]" />
-          <span>सदा सुहागन रहो</span>
-        </motion.div>
+        {/* Elegant subtle royal inner gold border */}
+        <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-[#dda45d]/60 pointer-events-none" />
       </motion.div>
 
       {/* Floating Bottom Heart Medallion with Flower Shower Cue */}
