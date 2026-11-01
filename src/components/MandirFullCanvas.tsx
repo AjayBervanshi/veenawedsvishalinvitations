@@ -661,7 +661,7 @@ export const MandirFullCanvas: React.FC = () => {
                 "Our hearts are full and our smiles wide! We are ready to make memories that last a lifetime, and our celebrations will be truly blessed by your presence in Ballia. Come join the Haldi, Mehndi, and Barat, and dance with us as we tie the sacred knot!"
               </p>
               <p className="font-script text-lg text-[#ab5626] text-right font-bold">
-                — With Warmest Love, Veena & Vishal
+                — With Warmest Love, Veena & Vishal ❤️
               </p>
             </div>
 

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { Heart, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/sound';
 
 export const AnimatedJourneyVisual: React.FC = () => {
   const [isShowering, setIsShowering] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const portraitSrc = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/assets/mandir/couple-portrait.jpg`;
 
   const handleMedallionClick = (e?: React.SyntheticEvent<HTMLElement>) => {
     // Play auspicious temple bell chime
@@ -102,14 +105,40 @@ export const AnimatedJourneyVisual: React.FC = () => {
         }}
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.95 }}
-        className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full border-3 border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.22)] overflow-hidden cursor-pointer group select-none transition-shadow hover:shadow-[0_20px_45px_rgba(221,164,93,0.5)] bg-[#fcf9f4]"
+        className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 rounded-full border-[3px] border-[#dda45d] shadow-[0_15px_35px_rgba(95,37,15,0.22)] overflow-hidden cursor-pointer group select-none transition-shadow hover:shadow-[0_20px_45px_rgba(221,164,93,0.5)] bg-[#fcf9f4]"
       >
-        <img
-          src="/assets/mandir/couple-portrait.jpg"
-          alt="Veena & Vishal — सदा सुहागन रहो"
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-          loading="eager"
-        />
+        {!imageError ? (
+          <img
+            src={portraitSrc}
+            alt="Veena & Vishal — सदा सुहागन रहो"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            loading="eager"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-b from-[#ffffff]/95 via-[#fcf9f4]/90 to-[#f5effa]/90">
+            <motion.div
+              animate={{ scale: [1, 1.06, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative mb-2"
+            >
+              <div className="flex items-center justify-center -space-x-3">
+                <div className="w-10 h-10 rounded-full border-2 border-[#dda45d] shadow-xs flex items-center justify-center bg-white/60">
+                  <span className="text-[10px] font-serif font-bold text-[#ab5626]">V</span>
+                </div>
+                <div className="w-10 h-10 rounded-full border-2 border-[#ab5626] shadow-xs flex items-center justify-center bg-white/60">
+                  <span className="text-[10px] font-serif font-bold text-[#5f250f]">V</span>
+                </div>
+              </div>
+            </motion.div>
+            <span className="font-regal text-sm font-bold text-[#5f250f]">
+              Veena & Vishal
+            </span>
+            <span className="text-[10px] font-shloka font-bold text-[#ab5626] mt-1">
+              सदा सुहागन रहो
+            </span>
+          </div>
+        )}
 
         {/* Elegant subtle royal inner gold border */}
         <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-[#dda45d]/60 pointer-events-none" />
