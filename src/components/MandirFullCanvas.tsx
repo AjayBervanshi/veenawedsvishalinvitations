@@ -219,6 +219,7 @@ export const MandirFullCanvas: React.FC = () => {
     return () => {
       cancelled = true;
       cleanup?.();
+      document.removeEventListener('visibilitychange', onVisible);
     };
   }, []);
 
