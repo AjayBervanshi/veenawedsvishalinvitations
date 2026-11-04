@@ -12,7 +12,7 @@ function requireSupabaseEnv(): Plugin {
     config(_config, env) {
       const loaded = loadEnv(env.mode, process.cwd(), 'VITE_');
       const missing = ['VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY'].filter(
-        (k) => !loaded[k]
+        (k) => !loaded[k] && !process.env[k]
       );
       if (missing.length > 0) {
         throw new Error(
