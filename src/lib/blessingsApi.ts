@@ -28,7 +28,7 @@ export const toBlessing = (r: Row): Blessing => ({
   timestamp: fmt(r.created_at),
 });
 
-const SEEDED_FAKE_NAMES = new Set([
+export const SEEDED_FAKE_NAMES = new Set([
   'rajmata shanti devi (naniji, ballia)',
   'mamaji arun kumar singh & family (ballia)',
   'chacha ramesh singh & chachi sunita (varanasi)',
@@ -42,7 +42,7 @@ const SEEDED_FAKE_NAMES = new Set([
   'test check bot'
 ]);
 
-const isRealBlessing = (r: Row): boolean => {
+export const isRealBlessing = (r: Row): boolean => {
   const name = (r.guest_name || '').trim().toLowerCase();
   const msg = (r.message || '').trim().toLowerCase();
   if (SEEDED_FAKE_NAMES.has(name) || name.includes('rameshwar')) return false;
@@ -51,9 +51,12 @@ const isRealBlessing = (r: Row): boolean => {
     name.includes('playwright') ||
     name.includes('probe') ||
     name.includes('verification') ||
+    name.includes('test') ||
+    name.includes('sync') ||
     msg.includes('playwright') ||
     msg.includes('probe') ||
-    (name.includes('test') && msg.includes('test'))
+    msg.includes('test') ||
+    msg.includes('sync test')
   );
 };
 

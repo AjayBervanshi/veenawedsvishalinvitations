@@ -810,8 +810,10 @@ export const MandirFullCanvas: React.FC = () => {
               {[
                 '॥ सदा सुहागन रहो ॥ 🌸',
                 'Infinite blessings to Veena & Vishal! ✨',
-                'Warmest wishes from Ballia! 🪔',
-                'May Mahadev shower eternal joy! ❤️'
+                'जोड़ी सलामत रहे, सदा खुश रहो! 🪔',
+                'May Mahadev shower eternal joy! ❤️',
+                'Warmest wishes from Ballia! 🌼',
+                'Seven sacred vows of eternal togetherness! 💫'
               ].map((chip, idx) => (
                 <button
                   key={idx}
