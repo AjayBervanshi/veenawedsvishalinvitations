@@ -187,6 +187,24 @@ export const MandirFullCanvas: React.FC = () => {
   useEffect(() => {
     fetchBlessings().then((rows) => rows.length && setBlessings(rows)).catch(() => {});
 
+    // Self-heal: when a guest returns to the tab (or reconnects after being
+    // offline), re-fetch the wall so missed blessings still appear even if the
+    // realtime channel dropped while the tab was hidden.
+    const onVisible = () => {
+      if (document.visibilityState !== 'visible') return;
+      fetchBlessings()
+        .then((rows) => {
+          if (rows.length) {
+            setBlessings((prev) => {
+              const seen = new Set(prev.map((p) => p.id));
+              return [...rows.filter((r) => !seen.has(r.id)), ...prev];
+            });
+          }
+        })
+        .catch(() => {});
+    };
+    document.addEventListener('visibilitychange', onVisible);
+
     let cleanup: (() => void) | undefined;
     let cancelled = false;
     subscribeBlessings((b) => {
@@ -201,6 +219,7 @@ export const MandirFullCanvas: React.FC = () => {
     return () => {
       cancelled = true;
       cleanup?.();
+      document.removeEventListener('visibilitychange', onVisible);
     };
   }, []);
 
