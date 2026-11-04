@@ -9,6 +9,9 @@ on:
 jobs:
   build-and-verify:
     runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://c--a2949c9b-c36f-4069-84c1-2379d383a02a-prod.lovable.cloud' }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_lpQ30dRUdpwdyrSbeacNIA_dEZYUJEl' }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -25,7 +28,4 @@ jobs:
         run: npm test
 
       - name: Build & Typecheck
-        env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://c--a2949c9b-c36f-4069-84c1-2379d383a02a-prod.lovable.cloud' }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_lpQ30dRUdpwdyrSbeacNIA_dEZYUJEl' }}
         run: npm run build

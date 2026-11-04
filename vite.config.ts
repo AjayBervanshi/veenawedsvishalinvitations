@@ -10,6 +10,10 @@ function requireSupabaseEnv(): Plugin {
   return {
     name: 'require-supabase-env',
     config(_config, env) {
+      // Do not block unit test runners (vitest)
+      if (process.env.VITEST || env.mode === 'test') {
+        return;
+      }
       const loaded = loadEnv(env.mode, process.cwd(), 'VITE_');
       const missing = ['VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY'].filter(
         (k) => !loaded[k] && !process.env[k]
