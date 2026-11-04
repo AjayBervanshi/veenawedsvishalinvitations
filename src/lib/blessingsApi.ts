@@ -46,7 +46,15 @@ const isRealBlessing = (r: Row): boolean => {
   const name = (r.guest_name || '').trim().toLowerCase();
   const msg = (r.message || '').trim().toLowerCase();
   if (SEEDED_FAKE_NAMES.has(name) || name.includes('rameshwar')) return false;
-  return !(name.includes('bot') || name.includes('playwright') || msg.includes('playwright') || (name.includes('test') && msg.includes('test')));
+  return !(
+    name.includes('bot') ||
+    name.includes('playwright') ||
+    name.includes('probe') ||
+    name.includes('verification') ||
+    msg.includes('playwright') ||
+    msg.includes('probe') ||
+    (name.includes('test') && msg.includes('test'))
+  );
 };
 
 export async function fetchBlessings(): Promise<Blessing[]> {

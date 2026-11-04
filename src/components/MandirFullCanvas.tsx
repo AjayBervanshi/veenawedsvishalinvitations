@@ -205,6 +205,7 @@ export const MandirFullCanvas: React.FC = () => {
     };
     document.addEventListener('visibilitychange', onVisible);
 
+    // Realtime subscription via Supabase postgres_changes
     let cleanup: (() => void) | undefined;
     let cancelled = false;
     subscribeBlessings((b) => {
@@ -216,9 +217,28 @@ export const MandirFullCanvas: React.FC = () => {
         else cleanup = off;
       })
       .catch(() => {});
+
+    // High-reliability background sync heartbeat (every 12s) to guarantee real-time sync
+    // across all phones, tablets and desktops even if mobile network sleeps the WebSocket
+    const syncInterval = setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
+      fetchBlessings()
+        .then((rows) => {
+          if (rows.length) {
+            setBlessings((prev) => {
+              const seen = new Set(prev.map((p) => p.id));
+              const newRows = rows.filter((r) => !seen.has(r.id));
+              return newRows.length ? [...newRows, ...prev] : prev;
+            });
+          }
+        })
+        .catch(() => {});
+    }, 12000);
+
     return () => {
       cancelled = true;
       cleanup?.();
+      clearInterval(syncInterval);
       document.removeEventListener('visibilitychange', onVisible);
     };
   }, []);
