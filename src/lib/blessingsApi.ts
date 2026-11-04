@@ -3,9 +3,9 @@ import type { Blessing } from '../types/wedding';
 
 type Row = { id: string; guest_name: string; message: string; side: string | null; created_at: string };
 
-// The database client is loaded lazily so that a missing or misconfigured
-// backend can never crash the whole invitation page — the wall falls back
-// to its seeded blessings and posting shows a friendly retry message.
+export const DEFAULT_SUPABASE_URL = 'https://c--a2949c9b-c36f-4069-84c1-2379d383a02a-prod.lovable.cloud';
+export const DEFAULT_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_lpQ30dRUdpwdyrSbeacNIA_dEZYUJEl';
+
 let dbPromise: Promise<SupabaseClient<any> | null> | null = null;
 
 export function getDb(): Promise<SupabaseClient<any> | null> {
@@ -61,27 +61,84 @@ export const isRealBlessing = (r: Row): boolean => {
 };
 
 export async function fetchBlessings(): Promise<Blessing[]> {
-  const db = await getDb();
-  if (!db) return [];
-  const { data, error } = await db
-    .from('blessings')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(100);
-  if (error) throw error;
-  return (data as Row[]).filter(isRealBlessing).map(toBlessing);
+  try {
+    const db = await getDb();
+    if (db) {
+      const { data, error } = await db
+        .from('blessings')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(100);
+      if (!error && data) {
+        return (data as Row[]).filter(isRealBlessing).map(toBlessing);
+      }
+    }
+  } catch (err) {
+    console.warn('Supabase JS fetchBlessings error, falling back to direct REST:', err);
+  }
+
+  // Resilient Direct REST fallback with project credentials
+  try {
+    const url = `${DEFAULT_SUPABASE_URL}/rest/v1/blessings?select=*&order=created_at.desc&limit=100`;
+    const res = await fetch(url, {
+      headers: {
+        apikey: DEFAULT_SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${DEFAULT_SUPABASE_PUBLISHABLE_KEY}`,
+      },
+    });
+    if (res.ok) {
+      const data: Row[] = await res.json();
+      return (data || []).filter(isRealBlessing).map(toBlessing);
+    }
+  } catch (err) {
+    console.warn('Direct REST fetchBlessings error:', err);
+  }
+
+  return [];
 }
 
 export async function postBlessing(name: string, message: string): Promise<Blessing> {
-  const db = await getDb();
-  if (!db) throw new Error('Database unavailable');
-  const { data, error } = await db
-    .from('blessings')
-    .insert({ guest_name: name.slice(0, 80), message: message.slice(0, 500) })
-    .select()
-    .single();
-  if (error) throw error;
-  return toBlessing(data as Row);
+  const cleanName = name.slice(0, 80);
+  const cleanMessage = message.slice(0, 500);
+
+  // 1. Try Supabase JS client
+  try {
+    const db = await getDb();
+    if (db) {
+      const { data, error } = await db
+        .from('blessings')
+        .insert({ guest_name: cleanName, message: cleanMessage })
+        .select()
+        .single();
+      if (!error && data) {
+        return toBlessing(data as Row);
+      }
+    }
+  } catch (err) {
+    console.warn('Supabase JS postBlessing error, trying direct REST:', err);
+  }
+
+  // 2. High-reliability direct REST call
+  const url = `${DEFAULT_SUPABASE_URL}/rest/v1/blessings`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: DEFAULT_SUPABASE_PUBLISHABLE_KEY,
+      Authorization: `Bearer ${DEFAULT_SUPABASE_PUBLISHABLE_KEY}`,
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify({ guest_name: cleanName, message: cleanMessage }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => '');
+    throw new Error(`Failed to post blessing (${res.status}): ${errText}`);
+  }
+
+  const rows = await res.json();
+  const row = Array.isArray(rows) ? rows[0] : rows;
+  return toBlessing(row as Row);
 }
 
 export async function subscribeBlessings(

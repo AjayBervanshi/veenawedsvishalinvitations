@@ -256,7 +256,8 @@ export const MandirFullCanvas: React.FC = () => {
       setBMsg('');
       setBSent(true);
       setTimeout(() => setBSent(false), 4000);
-    } catch {
+    } catch (err) {
+      console.error('[Blessing Wall Error]:', err);
       setBError('Could not post right now, please try again.');
     } finally {
       setBSending(false);
