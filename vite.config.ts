@@ -1,37 +1,46 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
+const DEFAULT_SUPABASE_URL = 'https://c--a2949c9b-c36f-4069-84c1-2379d383a02a-prod.lovable.cloud';
+const DEFAULT_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_lpQ30dRUdpwdyrSbeacNIA_dEZYUJEl';
+
 /**
- * Safeguard: the blessing wall / RSVP page cannot work without the backend
- * address baked into the bundle. If these variables are missing, the published
- * site renders but posting silently fails — so refuse to build instead.
+ * Ensures backend environment variables are always present for the live site,
+ * Lovable preview surfaces, and local builds without ever breaking preview updates.
  */
-function requireSupabaseEnv(): Plugin {
+function ensureSupabaseEnv(): Plugin {
   return {
-    name: 'require-supabase-env',
+    name: 'ensure-supabase-env',
     config(_config, env) {
-      // Do not block unit test runners (vitest)
       if (process.env.VITEST || env.mode === 'test') {
         return;
       }
       const loaded = loadEnv(env.mode, process.cwd(), 'VITE_');
-      const missing = ['VITE_SUPABASE_URL', 'VITE_SUPABASE_PUBLISHABLE_KEY'].filter(
-        (k) => !loaded[k] && !process.env[k]
-      );
-      if (missing.length > 0) {
-        throw new Error(
-          `[build guard] Missing ${missing.join(', ')} in .env — the live site would render but the blessing wall could never post. Restore .env before building.`
-        );
+      if (!loaded.VITE_SUPABASE_URL && !process.env.VITE_SUPABASE_URL) {
+        process.env.VITE_SUPABASE_URL = DEFAULT_SUPABASE_URL;
+      }
+      if (!loaded.VITE_SUPABASE_PUBLISHABLE_KEY && !process.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
+        process.env.VITE_SUPABASE_PUBLISHABLE_KEY = DEFAULT_SUPABASE_PUBLISHABLE_KEY;
       }
     },
   };
 }
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  plugins: [requireSupabaseEnv(), react()],
-  server: {
-    port: 5173,
-    host: true
-  }
-}));
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), 'VITE_');
+  const supabaseUrl = env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+  const supabaseKey = env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || DEFAULT_SUPABASE_PUBLISHABLE_KEY;
+
+  return {
+    define: {
+      'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(supabaseUrl),
+      'import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY': JSON.stringify(supabaseKey),
+    },
+    plugins: [ensureSupabaseEnv(), react()],
+    server: {
+      port: 5173,
+      host: true
+    }
+  };
+});
